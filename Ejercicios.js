@@ -63,3 +63,19 @@ Input	Step 1 (×2)	Step 2 (round)	Step 3 (/2)	Result
 2.5	    5.0	        5	            2.5	        2.5*/
 
 let solution = n => (Math.round(n * 2)) / 2 //Multiply by 2, round to the nearest integer, and divide by 2 to get the final result
+
+
+//FILTER AN ARRAY
+/*convierto a str n y luego a array
+hago Math.max(...array) para saber cuál es el mayor
+lo quito del array
+lo hago tantas veces como k
+return del array.join("")*/
+
+function solve(n, k) {
+  let arr = n.toString().split("")
+  for (let i = 0; i < k; i++) {
+    arr = arr.filter(elem => elem < Math.max(...arr)) //Retorno los menores que el máximo para filtrar sin trastocar el orden
+  }
+  return arr.join("")
+};

@@ -5,3 +5,6 @@ NUMBERS
 
 LOOPS
     - While
+
+ARRAY
+    - Filter
