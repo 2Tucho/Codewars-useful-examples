@@ -1,5 +1,8 @@
 KIND OF EXERCISES
 
+STRINGS
+    - Transform strings
+
 NUMBERS
     - Round Numbers
     - Factorial Number
@@ -9,3 +12,6 @@ LOOPS
 
 ARRAY
     - Filter
+
+FUNCTIONS
+    - Arguments

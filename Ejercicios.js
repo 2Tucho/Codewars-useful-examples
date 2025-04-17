@@ -73,18 +73,49 @@ lo hago tantas veces como k
 return del array.join("")*/
 
 function solve(n, k) {
-  let arr = n.toString().split("")
-  for (let i = 0; i < k; i++) {
-    arr = arr.filter(elem => elem < Math.max(...arr)) //Retorno los menores que el máximo para filtrar sin trastocar el orden
-  }
-  return arr.join("")
+    let arr = n.toString().split("")
+    for (let i = 0; i < k; i++) {
+        arr = arr.filter(elem => elem < Math.max(...arr)) //Retorno los menores que el máximo para filtrar sin trastocar el orden
+    }
+    return arr.join("")
 };
+
 
 //FACTORIAL NUMBER
 function factorial(n) {
     let res = 1
     for (let i = 1; i <= n; i++) {
-      res *= i
+        res *= i
     }
     return res
-  };
+};
+
+//TRANSFORM A STRING
+/* The marketing team is spending way too much time typing in hashtags.
+Let's help them with our own Hashtag Generator!
+
+Here's the deal:
+
+It must start with a hashtag (#).
+All words must have their first letter capitalized.
+If the final result is longer than 140 chars it must return false.
+If the input or the result is an empty string it must return false. */
+function generateHashtag (str) {
+    let arr = str.split(" ").filter(elem => elem !== "")
+    let arr1= arr.map(elem => elem[0].toUpperCase() + elem.slice(1))
+    let res = arr1.join("")
+
+    if (res.length > 0 && res.length < 140) {
+        return "#" + res
+    } else return false
+}
+
+//FUNCTION ARGUMENT HANDLE
+/* Write a function that finds the sum of all its arguments. */
+function sum() {
+    var total = 0;
+    for(var i in arguments){
+      total += arguments[i];
+    }
+    return total;
+  }
