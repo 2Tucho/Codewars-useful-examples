@@ -12,6 +12,7 @@ LOOPS
 
 ARRAY
     - Filter
+    - Order
 
 FUNCTIONS
     - Arguments
