@@ -152,17 +152,36 @@ Some players who find the standard game a bit too slow paced have adopted house 
 function battleOutcome( attacker , defender ) {
     let attDices = attacker.sort((a, b) => b - a) // To sort from bigger to smaller
     let defDices = defender.sort((a, b) => b - a)
-  
+
     let attUnits = 0
     let defUnits = 0
-  
+
     for(let i = 0; i < attacker.length; i++) {
-      if(attDices[i] > defDices[i]) {
+        if(attDices[i] > defDices[i]) {
         attUnits += 1  
-      } else if (attDices[i] <= defDices[i]) {
+        } else if (attDices[i] <= defDices[i]) {
         defUnits += 1
-      }
+        }
+    }
+
+    return [defUnits, attUnits]
+}
+
+//OBJECT PROPERTY-VALUE
+/* Complete the function that returns the color of the given square on a normal, 8x8 chess board: */
+function mineColor(file, rank) {
+    let value = {
+      a: 0,
+      b: 1,
+      c: 2,
+      d: 3,
+      e: 4,
+      f: 5,
+      g: 6,
+      h: 7
     }
     
-    return [defUnits, attUnits]
-  }
+    if((value[file] + rank) % 2 === 0) {
+      return "white"
+    } else return "black"
+}
