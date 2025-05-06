@@ -243,3 +243,59 @@ function maxConsecZeros(n) {
     if (maxConsecutiveZeros < 10) return units[maxConsecutiveZeros]; //Takes a value from units depending of the value of maxConsecutiveZeros, so 2 == "Two" and so
     if (maxConsecutiveZeros < 20) return teens[maxConsecutiveZeros - 10]; //Same, by sustracting 10 we get the unit and the value
 }
+
+//OBJECT KEY-VALUE
+/* Given a Hash made up of keys and values, invert the hash by swapping them. Keys and values may be of any type appropriate for use as a key.
+All hashes provided as input will have unique values, so the inversion is involutive. In other words, do not worry about identical values stored under different keys. */
+function invertHash(hash) {
+    const obj = {};
+    for (let el in hash) { //With the for in we are setting the values of the hash as keys for every pair and pushing it in the new object
+        obj[hash[el]] = el;
+    }
+    return obj;
+}
+
+//SUM OF NUMBERS IN AN ARRAY - REDUCE
+/* Write a function that takes an array of numbers and returns the sum of the numbers. The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0. 
+You can assume that you are only given numbers.
+You cannot assume the size of the array.
+You can assume that you do get an array and if the array is empty, return 0. */
+function sum(numbers) {
+    return numbers.reduce((a, b) => a + b, 0); //The final 0 if the array "numbers" is empty
+}
+
+
+//TRANSFORM A NUMBER INTO BINARY CODE
+/* Convert a number to a binary coded decimal (BCD).
+
+You can assume input will always be an integer. If it is a negative number then simply place a minus sign in front of the output string. Output will be a string with each digit of the input represented as 4 bits (0 padded) with a space between each set of 4 bits.
+
+Ex.
+
+n =  10 -> "0001 0000"
+n = -10 -> "-0001 0000" */
+function toBcd(number) {
+    let num = ("" + number).split("").map(num => Number(num).toString(2)); //Number to string and string to array. Then in each element we get its respective binary code
+
+    for (let i = 0; i < num.length; i++) {
+        let numLength = num[i].length;
+        if (numLength < 4) { //If the binary code length is lesser than 4 we must fill with zeros before the number. This way we substract 4 and the length so we get the number of 0 we need and we add them
+            let zeros = "";
+            for (let j = 0; j < 4 - numLength; j++) {
+                zeros += "0";
+            };
+            num[i] = zeros + num[i];
+        } else num[i] = "" + num[i]; //If the length is 4 then we want to converti it to strring again
+    };
+
+    let res = [];
+    if (number < 0) {
+        num.shift(); //Is the number is negative, the "-" symbol from the original argument equals a NaN at this point. With .shift we got that not desirable result out
+        res = "-" + num.join(" "); //Then add the "-" and the array becomes an string in which elements are separated by an space, as in the examples
+    } else res = num.join(" ");
+    return res
+}
+//PRO version
+function toBcd(number) {
+    return (number < 0 ? '-' : '') + Math.abs(number).toString().split('').map(d => (+d + 16).toString(2).slice(1)).join(' ');
+}
