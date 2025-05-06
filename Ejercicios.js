@@ -24,17 +24,17 @@ Sample Input
 
 Don't worry about invalid input. Arguments passed into the function are guaranteed to be valid integers >= 1.*/
 
-function collatz(n){
+function collatz(n) {
     let num = n; // Initialize num with the input value
     let res = `${num}`; //Res will contain the final answer, starting with the input value
 
     while (num !== 1) { // Loop until num becomes 1
         if (num % 2 === 0) {
-        num = num / 2; // If num is even, divide it by 2
-        res += "->" + num; // Append the new value to res 
+            num = num / 2; // If num is even, divide it by 2
+            res += "->" + num; // Append the new value to res 
         } else {
-        num = num * 3 + 1; // If num is odd, multiply it by 3 and add 1
-        res += "->" + num;
+            num = num * 3 + 1; // If num is odd, multiply it by 3 and add 1
+            res += "->" + num;
         }
     }
 
@@ -100,9 +100,9 @@ It must start with a hashtag (#).
 All words must have their first letter capitalized.
 If the final result is longer than 140 chars it must return false.
 If the input or the result is an empty string it must return false. */
-function generateHashtag (str) {
+function generateHashtag(str) {
     let arr = str.split(" ").filter(elem => elem !== "")
-    let arr1= arr.map(elem => elem[0].toUpperCase() + elem.slice(1))
+    let arr1 = arr.map(elem => elem[0].toUpperCase() + elem.slice(1))
     let res = arr1.join("")
 
     if (res.length > 0 && res.length < 140) {
@@ -114,7 +114,7 @@ function generateHashtag (str) {
 /* Write a function that finds the sum of all its arguments. */
 function sum() {
     let total = 0;
-    for(let i in arguments){
+    for (let i in arguments) {
         total += arguments[i];
     }
     return total;
@@ -149,18 +149,18 @@ Task
 Write a function which receives as inputs two arrays: one containing the attacker's die rolls in no particular order; the other the defender's die rolls again in no particular order, and returns the result of the battle as a two element array/tuple containing the numbers of units lost by the attacker and the defender respectively.
 
 Some players who find the standard game a bit too slow paced have adopted house rules for big battles in which one or both players may be permiited to roll more than 2 or 3 dice at the same time. The function should provide for this situation, and return an appropriate outcome to the big battle. */
-function battleOutcome( attacker , defender ) {
+function battleOutcome(attacker, defender) {
     let attDices = attacker.sort((a, b) => b - a) // To sort from bigger to smaller
     let defDices = defender.sort((a, b) => b - a)
 
     let attUnits = 0
     let defUnits = 0
 
-    for(let i = 0; i < attacker.length; i++) {
-        if(attDices[i] > defDices[i]) {
-        attUnits += 1  
+    for (let i = 0; i < attacker.length; i++) {
+        if (attDices[i] > defDices[i]) {
+            attUnits += 1
         } else if (attDices[i] <= defDices[i]) {
-        defUnits += 1
+            defUnits += 1
         }
     }
 
@@ -171,18 +171,18 @@ function battleOutcome( attacker , defender ) {
 /* Complete the function that returns the color of the given square on a normal, 8x8 chess board: */
 function mineColor(file, rank) {
     let value = {
-      a: 0,
-      b: 1,
-      c: 2,
-      d: 3,
-      e: 4,
-      f: 5,
-      g: 6,
-      h: 7
+        a: 0,
+        b: 1,
+        c: 2,
+        d: 3,
+        e: 4,
+        f: 5,
+        g: 6,
+        h: 7
     }
-    
-    if((value[file] + rank) % 2 === 0) {
-      return "white"
+
+    if ((value[file] + rank) % 2 === 0) {
+        return "white"
     } else return "black"
 }
 
@@ -196,3 +196,106 @@ const shuffleArray = (arr) => {
     return shuffled;
 };
 
+//FILTER AND TRANSFORM A STRING
+/* Given a string (str) containing a base-10 integer between 0 and 10000, convert the integer to its binary representation. At that point, obtain a count of the maximum amount of consecutive 0s. From there, return the count in written form with a capital letter.
+
+max_consec_zeros("9") => "Two"
+max_consec_zeros("13") => "One"
+max_consec_zeros("15") => "Zero"
+max_consec_zeros("42") => "One"
+max_consec_zeros("550") => "Three"
+In the very first example, we have an argument of "9" which is being passed to the method. The binary representation of 9 is 1001 which can be read as: one, zero, zero, one. There are, at most, two consecutive 0s, resulting in the integer 2 as the value of the count. The output in the block of code above reflects the final step of taking 2 from standard form to the written form "Two" as prompted.
+
+In the very last example, we have an argument of "550" which is being passed to the method. The binary representation of 550 is 1000100110 which can be read as: one, zero, zero, zero, one, zero, zero, one, one, zero. There are, at most, three consecutive 0s, resulting in the integer 3 as the value of the count. The output in the block of code above reflects the final step of taking 3 from standard form to the written form of "Three" as prompted.
+
+One way, among many, to visualize the end of each step might look like:
+
+max_consec_zeros("777")
+1: "777"
+2: 777
+3: 1100001001
+4: 4
+5: "Four"
+max_consec_zeros("777") => "Four" */
+function maxConsecZeros(n) {
+    let binary = Number(n).toString(2) //To transform a number to its binary value
+    let consecutiveZeros = [0] //It must have a 0 value so if no 0 are found in the binary number it doesn't result in an -infinity
+    let count = 0
+
+    for (let i = 1; i <= binary.length; i++) {
+        if (binary[i] === "0") {
+            count++ //Each time appears a 0 count adds 1
+        } else {
+            if (count > 0) { //The moment i == 1 it will take count and push it to consecutiveZeros. Then reset it to 0 
+                consecutiveZeros.push(count)
+                count = 0
+            }
+        }
+    }
+
+
+    let maxConsecutiveZeros = Math.max(...consecutiveZeros) //The ... are necessary in order to find the max in ALL the array
+
+    const units = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+    const teens = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+
+    if (maxConsecutiveZeros === 0) return 'Zero';
+    if (maxConsecutiveZeros < 10) return units[maxConsecutiveZeros]; //Takes a value from units depending of the value of maxConsecutiveZeros, so 2 == "Two" and so
+    if (maxConsecutiveZeros < 20) return teens[maxConsecutiveZeros - 10]; //Same, by sustracting 10 we get the unit and the value
+}
+
+//OBJECT KEY-VALUE
+/* Given a Hash made up of keys and values, invert the hash by swapping them. Keys and values may be of any type appropriate for use as a key.
+All hashes provided as input will have unique values, so the inversion is involutive. In other words, do not worry about identical values stored under different keys. */
+function invertHash(hash) {
+    const obj = {};
+    for (let el in hash) { //With the for in we are setting the values of the hash as keys for every pair and pushing it in the new object
+        obj[hash[el]] = el;
+    }
+    return obj;
+}
+
+//SUM OF NUMBERS IN AN ARRAY - REDUCE
+/* Write a function that takes an array of numbers and returns the sum of the numbers. The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0. 
+You can assume that you are only given numbers.
+You cannot assume the size of the array.
+You can assume that you do get an array and if the array is empty, return 0. */
+function sum(numbers) {
+    return numbers.reduce((a, b) => a + b, 0); //The final 0 if the array "numbers" is empty
+}
+
+
+//TRANSFORM A NUMBER INTO BINARY CODE
+/* Convert a number to a binary coded decimal (BCD).
+
+You can assume input will always be an integer. If it is a negative number then simply place a minus sign in front of the output string. Output will be a string with each digit of the input represented as 4 bits (0 padded) with a space between each set of 4 bits.
+
+Ex.
+
+n =  10 -> "0001 0000"
+n = -10 -> "-0001 0000" */
+function toBcd(number) {
+    let num = ("" + number).split("").map(num => Number(num).toString(2)); //Number to string and string to array. Then in each element we get its respective binary code
+
+    for (let i = 0; i < num.length; i++) {
+        let numLength = num[i].length;
+        if (numLength < 4) { //If the binary code length is lesser than 4 we must fill with zeros before the number. This way we substract 4 and the length so we get the number of 0 we need and we add them
+            let zeros = "";
+            for (let j = 0; j < 4 - numLength; j++) {
+                zeros += "0";
+            };
+            num[i] = zeros + num[i];
+        } else num[i] = "" + num[i]; //If the length is 4 then we want to converti it to strring again
+    };
+
+    let res = [];
+    if (number < 0) {
+        num.shift(); //Is the number is negative, the "-" symbol from the original argument equals a NaN at this point. With .shift we got that not desirable result out
+        res = "-" + num.join(" "); //Then add the "-" and the array becomes an string in which elements are separated by an space, as in the examples
+    } else res = num.join(" ");
+    return res
+}
+//PRO version
+function toBcd(number) {
+    return (number < 0 ? '-' : '') + Math.abs(number).toString().split('').map(d => (+d + 16).toString(2).slice(1)).join(' ');
+}
