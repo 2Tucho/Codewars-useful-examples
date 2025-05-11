@@ -2,6 +2,7 @@ KIND OF EXERCISES
 
 STRINGS
     - Transform strings
+    - Compare strings 
 
 NUMBERS
     - Round Numbers
