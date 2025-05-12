@@ -14,6 +14,7 @@ LOOPS
 ARRAY
     - Filter
     - Order
+    - Sort
 
 FUNCTIONS
     - Arguments

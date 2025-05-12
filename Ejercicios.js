@@ -321,36 +321,36 @@ Result: odds win the battle with 4-1 */
 function bitsBattle(numbers) {
     let odds = []
     let evens = []
-  
-    for(let i = 0; i < numbers.length; i++) {
-      if(numbers[i] === 0) {
-        null
-      } else if(numbers[i] % 2 === 0) {
-        evens.push(numbers[i])
-      } else odds.push(numbers[i])
+
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] === 0) {
+            null
+        } else if (numbers[i] % 2 === 0) {
+            evens.push(numbers[i])
+        } else odds.push(numbers[i])
     }
-  
+
     odds = odds.map(num => num.toString(2)).join("")
     evens = evens.map(num => num.toString(2)).join("")
-  
+
     let zeroCount = 0
     let oneCount = 0
-  
-    for(let i = 0; i < odds.length; i++) {
-      if(odds[i] === "1") {
-        oneCount++  
-      }  
+
+    for (let i = 0; i < odds.length; i++) {
+        if (odds[i] === "1") {
+            oneCount++
+        }
     }
-    for(let i = 0; i < evens.length; i++) {
-      if(evens[i] === "0") {
-        zeroCount++  
-      }  
+    for (let i = 0; i < evens.length; i++) {
+        if (evens[i] === "0") {
+            zeroCount++
+        }
     }
-  
-    if(zeroCount > oneCount) {
-      return "evens win"
-    } else if(zeroCount < oneCount) {
-      return "odds win"
+
+    if (zeroCount > oneCount) {
+        return "evens win"
+    } else if (zeroCount < oneCount) {
+        return "odds win"
     } else return "tie"
 }
 
@@ -365,19 +365,44 @@ Examples (input -> output)
 "aBcd","AbCD" -> true
 "AB","Ab"     -> false
 "",""         -> false */
-function isOpposite(s1, s2){
-  if(s1.length == 0 || s2.length == 0 || s1.length !== s2.length) {
-    return false;
-  };
-  let upper1 = s1.toUpperCase();
-  let upper2 = s2.toUpperCase();
-  let count = 0;
-  for(let i = 0; i < s1.length; i++) {
-    if(upper1[i] == upper2[i] && s1[i] !== s2[i]) {
-      count++;
+function isOpposite(s1, s2) {
+    if (s1.length == 0 || s2.length == 0 || s1.length !== s2.length) {
+        return false;
+    };
+    let upper1 = s1.toUpperCase();
+    let upper2 = s2.toUpperCase();
+    let count = 0;
+    for (let i = 0; i < s1.length; i++) {
+        if (upper1[i] == upper2[i] && s1[i] !== s2[i]) {
+            count++;
+        }
     }
-  }
-  if(count == s1.length) {
-    return true;
-  } else return false;
+    if (count == s1.length) {
+        return true;
+    } else return false;
+}
+
+//BUBBLE SORT. SORT WITHOUT METHODS
+function bblSort(arr) {
+
+    for (var i = 0; i < arr.length; i++) {
+
+        // Last i elements are already in place  
+        for (var j = 0; j < (arr.length - i - 1); j++) {
+
+            // Checking if the item at present iteration 
+            // is greater than the next iteration
+            if (arr[j] > arr[j + 1]) {
+
+                // If the condition is true
+                // then swap them
+                var temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
+        }
+    }
+
+    // Print the sorted array
+    return arr;
 }
