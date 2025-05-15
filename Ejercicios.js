@@ -406,3 +406,56 @@ function bblSort(arr) {
     // Print the sorted array
     return arr;
 }
+
+
+//SUM OF MULTIPLES NUMBERS
+/* Return the sum of the multiples of 3 and 5 below a number. Your solution should work for really large numbers (greater than 1,000,000). */
+function sumMultiplesOf3And5(n) {
+    // Calculate the number of terms below n for 3, 5, and 15
+    const numTerms = (k) => Math.floor((n - 1) / k);
+
+    // Sum of an arithmetic series: S = k * m * (m + 1) / 2
+    const sum = (k) => k * numTerms(k) * (numTerms(k) + 1) / 2;
+
+    // ' 15 To avoid double-counting numbers divisible by both 3 and 5
+    return sum(3) + sum(5) - sum(15);
+}
+
+
+//PROPERTY-VALUE HANDLE
+function testit(s) {
+    const letters = {
+        a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9, j: 10, k: 11, l: 12, m: 13,
+        n: 14, o: 15, p: 16, q: 17, r: 18, s: 19, t: 20, u: 21, v: 22, w: 23, x: 24, y: 25, z: 26
+    };
+
+    // Create reverse mapping
+    const numbersToLetters = {};
+    for (const key in letters) {
+        numbersToLetters[letters[key]] = key;
+    }
+
+    const convertedLetters = s.split("").map(elem => letters[elem]);
+    const numArray = [];
+
+    for (let i = 0; i < convertedLetters.length; i += 2) {
+        let avg;
+        // Handle odd-length case - use the last number as is
+        if (i + 1 >= convertedLetters.length) {
+            avg = convertedLetters[i];
+        } else {
+            avg = (convertedLetters[i] + convertedLetters[i + 1]) / 2;
+        }
+        numArray.push(Math.floor(avg));
+    }
+
+    // Convert numbers back to letters, filtering out undefined values
+    const finalLetters = numArray
+        .map(num => numbersToLetters[num])
+        .filter(letter => letter !== undefined)
+        .join("");
+
+    return finalLetters;
+}
+
+testit("abc"); // "ac" (average of a(1) and b(2) is 1.5 → floor(1.5)=1. c is left alone so it adds up to the result as it is)

@@ -7,6 +7,7 @@ STRINGS
 NUMBERS
     - Round Numbers
     - Factorial Number
+    - Multiples
 
 LOOPS
     - While
@@ -20,4 +21,4 @@ FUNCTIONS
     - Arguments
 
 OBJECTS
-    - Porperty-Value
+    - Property-Value
