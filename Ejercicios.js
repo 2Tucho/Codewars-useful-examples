@@ -478,3 +478,49 @@ function computerToPhone(numbers) {
     }
     return result
 }
+
+//STRING TRANSFORMATION
+/* Write a function that takes in a string and replaces all the letters with their respective positions in the English alphabet; e.g. 'a' is 1, 'z' is 26. The function should be case-insensitive. */
+function encode(str) {
+    const letters = {
+        a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9, j: 10, k: 11, l: 12, m: 13, n: 14, o: 15, p: 16, q: 17, r: 18, s: 19, t: 20, u: 21, v: 22, w: 23, x: 24, y: 25, z: 26
+    };
+    let result = str.split("").map(elem => {
+        if (letters[elem.toLowerCase()] === undefined) {
+            return elem;
+        } else return letters[elem.toLowerCase()];
+    })
+    return result.join("");
+}
+
+//ARRAY FILTER
+/* It's Friday the 13th, and Jason is ready for his first killing spree!
+
+Create a function, killcount, that accepts two arguments: an array of array pairs (the conselor's name and intelligence - ["Chad", 2]) and an integer representing Jason's intellegence.
+
+JavaScript:
+let counselors = [["Chad", 2], ["Tommy", 6], ["Michael", 11]];
+let jason = 7;
+output // ["Chad", "Tommy"]
+
+Your function must return an array of the names of all the counselors who can be outsmarted and killed by Jason. */
+function killcount(counselors, jason){
+  let names = [];
+  for (let i = 0; i < counselors.length; i++) {
+    if(counselors[i][1] < jason) {
+      names.push(counselors[i][0])
+    }
+  }
+  return names
+}
+
+//REGEX
+/* Write a function that accepts a string, and returns true if it is in the form of a phone number.
+Assume that any integer from 0-9 in any of the spots will produce a valid phone number.
+
+Only worry about the following format:
+(123) 456-7890 (don't forget the space after the close parentheses) */
+function validPhoneNumber(phoneNumber){
+  return /^\(\d{3}\)\S\d{3}\-\d{4}$/.test(phoneNumber);
+  /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
+}
