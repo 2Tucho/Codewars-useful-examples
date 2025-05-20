@@ -524,3 +524,30 @@ function validPhoneNumber(phoneNumber){
   return /^\(\d{3}\)\S\d{3}\-\d{4}$/.test(phoneNumber);
   /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
 }
+
+//FILTER ELEMENTS IN AN ARRAY
+/* Determine whether a non-negative integer number is colorful or not.
+
+263 is a colorful number because [2, 6, 3, 2*6, 6*3, 2*6*3] are all different; whereas
+236 is not colorful, because [2, 3, 6, 2*3, 3*6, 2*3*6] has 6 twice.
+
+So take all consecutive subsets of digits, take their products, and ensure all the products are different.
+
+Examples
+263  -->  true
+236  -->  false */
+function colourful(number) {
+  const str = (number + "").split("")
+  const arr = []
+  for(let i = 0; i < str.length; i++) {
+    arr.push(str[i])
+  }
+  for(let i = 0; i < str.length - 1; i++) {
+    arr.push(str[i] * str[i + 1])
+  }
+  const res = arr.map(elem => Math.abs(elem))
+                 .filter((item, index, array) => array.indexOf(item) !== index) // Filter to fin the element that are repeated in an array
+  if(res.length > 0) {
+    return false
+  } else return true
+}
