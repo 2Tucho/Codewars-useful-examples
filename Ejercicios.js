@@ -504,14 +504,14 @@ let jason = 7;
 output // ["Chad", "Tommy"]
 
 Your function must return an array of the names of all the counselors who can be outsmarted and killed by Jason. */
-function killcount(counselors, jason){
-  let names = [];
-  for (let i = 0; i < counselors.length; i++) {
-    if(counselors[i][1] < jason) {
-      names.push(counselors[i][0])
+function killcount(counselors, jason) {
+    let names = [];
+    for (let i = 0; i < counselors.length; i++) {
+        if (counselors[i][1] < jason) {
+            names.push(counselors[i][0])
+        }
     }
-  }
-  return names
+    return names
 }
 
 //REGEX
@@ -520,9 +520,9 @@ Assume that any integer from 0-9 in any of the spots will produce a valid phone 
 
 Only worry about the following format:
 (123) 456-7890 (don't forget the space after the close parentheses) */
-function validPhoneNumber(phoneNumber){
-  return /^\(\d{3}\)\S\d{3}\-\d{4}$/.test(phoneNumber);
-  /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
+function validPhoneNumber(phoneNumber) {
+    return /^\(\d{3}\)\S\d{3}\-\d{4}$/.test(phoneNumber);
+    /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
 }
 
 //FILTER ELEMENTS IN AN ARRAY
@@ -537,19 +537,19 @@ Examples
 263  -->  true
 236  -->  false */
 function colourful(number) {
-  const str = (number + "").split("")
-  const arr = []
-  for(let i = 0; i < str.length; i++) {
-    arr.push(str[i])
-  }
-  for(let i = 0; i < str.length - 1; i++) {
-    arr.push(str[i] * str[i + 1])
-  }
-  const res = arr.map(elem => Math.abs(elem))
-                 .filter((item, index, array) => array.indexOf(item) !== index) // Filter to fin the element that are repeated in an array
-  if(res.length > 0) {
-    return false
-  } else return true
+    const str = (number + "").split("")
+    const arr = []
+    for (let i = 0; i < str.length; i++) {
+        arr.push(str[i])
+    }
+    for (let i = 0; i < str.length - 1; i++) {
+        arr.push(str[i] * str[i + 1])
+    }
+    const res = arr.map(elem => Math.abs(elem))
+        .filter((item, index, array) => array.indexOf(item) !== index) // Filter to fin the element that are repeated in an array
+    if (res.length > 0) {
+        return false
+    } else return true
 }
 
 // ARRAY FILTER
@@ -562,12 +562,53 @@ solve("xyab","xzca") = "ybzc"
 --The second string has 'zc' which is not in the first string. 
 Notice also that you return the characters from the first string concatenated with those from the second string. */
 function solve(a, b) {
-  const arrA = a.split("");
-  const arrB = b.split("");
-  
-  //The filter searches each letter in the original string with the includes string method. It will leave only the letters that aren't there
-  const notCommonA = arrA.filter(letter => !b.includes(letter));
-  const notCommonB = arrB.filter(letter => !a.includes(letter));
-  
-  return notCommonA.concat(notCommonB).join("");
+    const arrA = a.split("");
+    const arrB = b.split("");
+
+    //The filter searches each letter in the original string with the includes string method. It will leave only the letters that aren't there
+    const notCommonA = arrA.filter(letter => !b.includes(letter));
+    const notCommonB = arrB.filter(letter => !a.includes(letter));
+
+    return notCommonA.concat(notCommonB).join("");
+}
+
+//ARRAY MAP, FILTER AND REDUCE
+/* Find the sum of the odd numbers within an array, after cubing the initial integers. The function should return undefined if any of the values aren't numbers.
+
+cubeOdd([1, 2, 3, 4]) //28
+cubeOdd([-3,-2,2,3]) //0
+cubeOdd(["a",12,9,"z",42]) //undefined
+*/
+function cubeOdd(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr.length == 0 || typeof arr[i] !== "number") {
+            return undefined
+        }
+    }
+    return arr.map(num => num * num * num)
+        .filter(num => Math.abs(num) % 2 == 1)
+        .reduce((acc, val) => acc + val)
+}
+
+//FUNCTION ARGUMENTS
+/* Complete the function which will help you compute a geometric progression / series.
+
+The parameters provided are as follows:
+
+a is the first term
+r is the common ratio
+n is the amount of terms
+Example:
+
+a = 2, r = 3, n = 5 should return 242. */
+function GeometricSequenceSum(a, r, n) {
+    let arr = [a]
+    let count = a
+    
+    for (let i = 0; i < n - 1; i++) { // n - 1 because I have already set the first element in arr
+        count = count * r
+        arr = arr.concat(count)
+    }
+
+    return arr.reduce((acc, val) => acc + val)
 }
