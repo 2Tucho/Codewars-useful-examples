@@ -604,11 +604,37 @@ a = 2, r = 3, n = 5 should return 242. */
 function GeometricSequenceSum(a, r, n) {
     let arr = [a]
     let count = a
-    
+
     for (let i = 0; i < n - 1; i++) { // n - 1 because I have already set the first element in arr
         count = count * r
         arr = arr.concat(count)
     }
 
     return arr.reduce((acc, val) => acc + val)
+}
+
+//ARRAY FILTER
+/* Filter elements where the count of the element in the array is even.
+Test Case:
+balancedFilter(['a', 'b', 'b', 'a', 'c', 'd', 'd']);  Should return ['a', 'b', 'd'] (each appears 2x) */
+const balancedFilter = (arr) => {
+    let count = 0
+    let res = []
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+                count++
+            }
+        }
+        if (count % 2 === 0) {
+            if (res.includes(arr[i])) {
+                count = 0
+            } else {
+                res.push(arr[i])
+                count = 0
+            }
+        } else count = 0
+    }
+    return res
 }
