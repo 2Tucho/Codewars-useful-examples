@@ -16,6 +16,7 @@ ARRAY
     - Filter
     - Order
     - Sort
+    - Transform
 
 FUNCTIONS
     - Arguments
