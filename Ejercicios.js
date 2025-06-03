@@ -701,3 +701,119 @@ function score(dice) {
     out += (five.length % 3) * 50;
     return out;
 }
+
+//DAILY CODE PROBLEM (MEDIUM)
+/* Write an algorithm to justify text. Given a sequence of words and an integer line length k, return a list of strings which represents each line, fully justified.
+
+More specifically, you should have as many words as possible in each line. There should be at least one space between each word. Pad extra spaces when necessary so that each line has exactly length k. Spaces should be distributed as equally as possible, with the extra spaces, if any, distributed starting from the left.
+
+If you can only fit one word on a line, then you should pad the right-hand side with spaces.
+
+Each word is guaranteed not to be longer than k.
+
+For example, given the list of words ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] and k = 16, you should return the following:
+
+["the  quick brown", # 1 extra space on the left
+"fox  jumps  over", # 2 extra spaces distributed evenly
+"the   lazy   dog"] # 4 extra spaces distributed evenly */
+function justifyText(words, k) {
+    const result = [];
+    let currentLine = [];
+    let currentLength = 0;
+
+    // Step 1: Group words into lines
+    for (const word of words) {
+        if (currentLine.length === 0) {
+            // First word in the line
+            if (word.length <= k) {
+                currentLine.push(word);
+                currentLength = word.length;
+            }
+        } else {
+            // Check if adding another word fits
+            if (currentLength + 1 + word.length <= k) {
+                currentLine.push(word);
+                currentLength += 1 + word.length; // +1 for the space
+            } else {
+                // Process the current line and start a new one
+                result.push(justifyLine(currentLine, k));
+                currentLine = [word];
+                currentLength = word.length;
+            }
+        }
+    }
+    // Add the last line (left-justified)
+    if (currentLine.length > 0) {
+        result.push(leftJustify(currentLine, k));
+    }
+    return result;
+}
+
+function justifyLine(words, k) {
+    if (words.length === 1) {
+        return leftJustify(words, k);
+    }
+    const totalSpaces = k - words.reduce((sum, word) => sum + word.length, 0);
+    const gaps = words.length - 1;
+    const baseSpace = Math.floor(totalSpaces / gaps);
+    let extraSpaces = totalSpaces % gaps;
+    let line = words[0];
+    for (let i = 1; i < words.length; i++) {
+        const spaces = baseSpace + (extraSpaces-- > 0 ? 1 : 0);
+        line += ' '.repeat(spaces) + words[i];
+    }
+    return line;
+}
+
+function leftJustify(words, k) {
+    const line = words.join(' ');
+    return line + ' '.repeat(k - line.length);
+}
+
+// Example usage
+const words = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+const k = 16;
+console.log(justifyText(words, k));
+// Output:
+// ["the  quick brown", "fox  jumps  over", "the   lazy   dog"]
+
+//DAILY CODE PROBLEM (EASY)
+/* Given a string of round, curly, and square open and closing brackets, return whether the brackets are balanced (well-formed).
+
+For example, given the string "([])[]({})", you should return true.
+
+Given the string "([)]" or "((()", you should return false. */
+function isBalanced(s) {
+    /**+ We can use a stack (like a pile of plates) to keep track of the opening brackets:
+When we see an opening bracket, we push it onto the stack.
+When we see a closing bracket, we pop the top of the stack and check if it matches the closing bracket.
+If it doesn’t match, the string is unbalanced.
+If we finish the string and the stack is empty, all brackets are balanced. */
+    const stack = [];
+    const bracketPairs = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    }; // A dictionary maps each closing bracket to its opening counterpart.
+    const openingBrackets = new Set(['(', '{', '[']);
+
+    for (const char of s) {
+        if (openingBrackets.has(char)) { // If each character of s has an opening bracket this goes pushed to stack
+            stack.push(char); // Push opening brackets
+        // If it hasn't is a closing bracket            
+        } else {
+            // If stack is empty or top doesn't match, return false. If it matches, it pops that opening bracket and keeps the loop
+            if (stack.length === 0 || stack[stack.length - 1] !== bracketPairs[char]) {
+                return false;
+            }
+            stack.pop();
+        }
+    }
+
+    return stack.length === 0; // If the stack is empty, all brackets were properly matched and closed.
+}
+
+// Test cases
+console.log(isBalanced("([])[]({})")); // true
+console.log(isBalanced("([)]"));       // false
+console.log(isBalanced("((()"));       // false
