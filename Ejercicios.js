@@ -666,3 +666,154 @@ function makeSentence(parts) {
 
     return res + "."
 }
+
+//ARRAY FILTER
+/* Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
+
+ Three 1's => 1000 points
+ Three 6's =>  600 points
+ Three 5's =>  500 points
+ Three 4's =>  400 points
+ Three 3's =>  300 points
+ Three 2's =>  200 points
+ One   1   =>  100 points
+ One   5   =>   50 point
+A single die can only be counted once in each roll. For example, a given "5" can only count as part of a triplet (contributing to the 500 points) or as a single 50 points, but not both in the same roll.
+
+Example scoring
+
+ Throw       Score
+ ---------   ------------------
+ 5 1 3 4 1   250:  50 (for the 5) + 2 * 100 (for the 1s)
+ 1 1 1 3 1   1100: 1000 (for three 1s) + 100 (for the other 1)
+ 2 4 4 5 4   450:  400 (for three 4s) + 50 (for the 5)
+Note: your solution must not modify the input array. */
+function score(dice) {
+    let out = 0;
+    for (let j = 2; j <= 6; j++) {
+        if (dice.filter(i => i === j).length > 2) out += j * 100; //From 2-6 the only points given are for trios of each number
+    }
+    //The only exceptions are 1 and 5
+    let one = dice.filter(i => i === 1);
+    let five = dice.filter(i => i === 5);
+    if (one.length > 2) out += 1000; //For a 1 trio. 
+    out += (one.length % 3) * 100; //If 1 returns 1, if 2 returns 2, with 3 returns 0. It repeats since then (for 4 returns 1, 5 returns 2, 6 returns 0...)
+    out += (five.length % 3) * 50;
+    return out;
+}
+
+//DAILY CODING PROBLEMS (MEDIUM)
+/* Write an algorithm to justify text. Given a sequence of words and an integer line length k, return a list of strings which represents each line, fully justified.
+
+More specifically, you should have as many words as possible in each line. There should be at least one space between each word. Pad extra spaces when necessary so that each line has exactly length k. Spaces should be distributed as equally as possible, with the extra spaces, if any, distributed starting from the left.
+
+If you can only fit one word on a line, then you should pad the right-hand side with spaces.
+
+Each word is guaranteed not to be longer than k.
+
+For example, given the list of words ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] and k = 16, you should return the following:
+
+["the  quick brown", # 1 extra space on the left
+"fox  jumps  over", # 2 extra spaces distributed evenly
+"the   lazy   dog"] # 4 extra spaces distributed evenly */
+function justifyText(words, k) {
+    const result = [];
+    let currentLine = [];
+    let currentLength = 0;
+
+    // Step 1: Group words into lines
+    for (const word of words) {
+        if (currentLine.length === 0) {
+            // First word in the line
+            if (word.length <= k) {
+                currentLine.push(word);
+                currentLength = word.length;
+            }
+        } else {
+            // Check if adding another word fits
+            if (currentLength + 1 + word.length <= k) {
+                currentLine.push(word);
+                currentLength += 1 + word.length; // +1 for the space
+            } else {
+                // Process the current line and start a new one
+                result.push(justifyLine(currentLine, k));
+                currentLine = [word];
+                currentLength = word.length;
+            }
+        }
+    }
+    // Add the last line (left-justified)
+    if (currentLine.length > 0) {
+        result.push(leftJustify(currentLine, k));
+    }
+    return result;
+}
+
+function justifyLine(words, k) {
+    if (words.length === 1) {
+        return leftJustify(words, k);
+    }
+    const totalSpaces = k - words.reduce((sum, word) => sum + word.length, 0);
+    const gaps = words.length - 1;
+    const baseSpace = Math.floor(totalSpaces / gaps);
+    let extraSpaces = totalSpaces % gaps;
+    let line = words[0];
+    for (let i = 1; i < words.length; i++) {
+        const spaces = baseSpace + (extraSpaces-- > 0 ? 1 : 0);
+        line += ' '.repeat(spaces) + words[i];
+    }
+    return line;
+}
+
+function leftJustify(words, k) {
+    const line = words.join(' ');
+    return line + ' '.repeat(k - line.length);
+}
+
+// Example usage
+const words = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+const k = 16;
+console.log(justifyText(words, k));
+// Output:
+// ["the  quick brown", "fox  jumps  over", "the   lazy   dog"]
+
+//DAILY CODING PROBLEMS (EASY)
+/* Given a string of round, curly, and square open and closing brackets, return whether the brackets are balanced (well-formed).
+
+For example, given the string "([])[]({})", you should return true.
+
+Given the string "([)]" or "((()", you should return false. */
+function isBalanced(s) {
+    /**+ We can use a stack (like a pile of plates) to keep track of the opening brackets:
+When we see an opening bracket, we push it onto the stack.
+When we see a closing bracket, we pop the top of the stack and check if it matches the closing bracket.
+If it doesn’t match, the string is unbalanced.
+If we finish the string and the stack is empty, all brackets are balanced. */
+    const stack = [];
+    const bracketPairs = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    }; // A dictionary maps each closing bracket to its opening counterpart.
+    const openingBrackets = new Set(['(', '{', '[']);
+
+    for (const char of s) {
+        if (openingBrackets.has(char)) { // If each character of s has an opening bracket this goes pushed to stack
+            stack.push(char); // Push opening brackets
+        // If it hasn't is a closing bracket            
+        } else {
+            // If stack is empty or top doesn't match, return false. If it matches, it pops that opening bracket and keeps the loop
+            if (stack.length === 0 || stack[stack.length - 1] !== bracketPairs[char]) {
+                return false;
+            }
+            stack.pop();
+        }
+    }
+
+    return stack.length === 0; // If the stack is empty, all brackets were properly matched and closed.
+}
+
+// Test cases
+console.log(isBalanced("([])[]({})")); // true
+console.log(isBalanced("([)]"));       // false
+console.log(isBalanced("((()"));       // false
