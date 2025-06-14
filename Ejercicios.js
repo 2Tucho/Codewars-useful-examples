@@ -800,7 +800,7 @@ If we finish the string and the stack is empty, all brackets are balanced. */
     for (const char of s) {
         if (openingBrackets.has(char)) { // If each character of s has an opening bracket this goes pushed to stack
             stack.push(char); // Push opening brackets
-        // If it hasn't is a closing bracket            
+            // If it hasn't is a closing bracket            
         } else {
             // If stack is empty or top doesn't match, return false. If it matches, it pops that opening bracket and keeps the loop
             if (stack.length === 0 || stack[stack.length - 1] !== bracketPairs[char]) {
@@ -817,3 +817,23 @@ If we finish the string and the stack is empty, all brackets are balanced. */
 console.log(isBalanced("([])[]({})")); // true
 console.log(isBalanced("([)]"));       // false
 console.log(isBalanced("((()"));       // false
+
+//DAILY CODING PROBLEMS (MEDIUM)
+/* Given an array of integers, return a new array such that each element at index i of the new array is the product of all the numbers in the original array except the one at i. For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120, 60, 40, 30, 24]. If our input was [3, 2, 1], the expected output would be [2, 3, 6].
+Follow-up: what if you can't use division? */
+const integersProductsWithDivision = (array) => {
+    let res = []
+
+    for (let i = 0; i < arr.length; i++) {
+        res.push(arr.reduce((acc, val) => acc * val) / arr[i])
+    }
+
+    return res
+}
+
+//DAILY CODING PROBLEMS (MEDIUM)
+/* Implement an autocomplete system. That is, given a query string s and a set of all possible query strings, return all strings in the set that have s as a prefix.
+For example, given the query string de and the set of strings [dog, deer, deal], return [deer, deal].
+Hint: Try preprocessing the dictionary into a more efficient data structure to speed up queries. */
+
+const filterStringsByPrefix = (prefix, array) => arr.filter(elem => elem.slice(0, prefix.length) === prefix)
