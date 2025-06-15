@@ -835,5 +835,57 @@ const integersProductsWithDivision = (array) => {
 /* Implement an autocomplete system. That is, given a query string s and a set of all possible query strings, return all strings in the set that have s as a prefix.
 For example, given the query string de and the set of strings [dog, deer, deal], return [deer, deal].
 Hint: Try preprocessing the dictionary into a more efficient data structure to speed up queries. */
-
 const filterStringsByPrefix = (prefix, array) => arr.filter(elem => elem.slice(0, prefix.length) === prefix)
+
+//DAILY CODING PROBLEMS (MEDIUM)
+/* A builder is looking to build a row of N houses that can be of K different colors. He has a goal of minimizing cost while ensuring that no two neighboring houses are of the same color.
+Given an N by K matrix where the nth row and kth column represents the cost to build the nth house with kth color, return the minimum cost which achieves this goal. */
+function minCost(costs) {
+    if (!costs || costs.length === 0 || costs[0].length === 0) {
+        return 0;
+    }
+
+    const n = costs.length;
+    const k = costs[0].length;
+
+    if (k === 1) {
+        return n === 1 ? costs[0][0] : Infinity; // Impossible if more than one house and only one color
+    }
+
+    let prevMin = 0;
+    let prevSecondMin = 0;
+    let prevColor = -1;
+
+    for (let i = 0; i < n; i++) {
+        let currentMin = Infinity;
+        let currentSecondMin = Infinity;
+        let currentColor = -1;
+
+        for (let j = 0; j < k; j++) {
+            // Calculate the cost for current house and color j
+            const cost = costs[i][j] + (j === prevColor ? prevSecondMin : prevMin);
+
+            // Update currentMin and currentSecondMin
+            if (cost < currentMin) {
+                currentSecondMin = currentMin;
+                currentMin = cost;
+                currentColor = j;
+            } else if (cost < currentSecondMin) {
+                currentSecondMin = cost;
+            }
+        }
+
+        prevMin = currentMin;
+        prevSecondMin = currentSecondMin;
+        prevColor = currentColor;
+    }
+
+    return prevMin;
+}
+
+// Example usage
+const costs = [
+    [1, 5, 3],
+    [2, 9, 4]
+];
+console.log(minCost(costs)); // Output: 5 (1 + 4)
