@@ -889,3 +889,37 @@ const costs = [
     [2, 9, 4]
 ];
 console.log(minCost(costs)); // Output: 5 (1 + 4)
+
+//DAILY CODING PROBLEM
+/* Given an array of strictly the characters 'R', 'G', and 'B', segregate the values of the array so that all the Rs come first, the Gs come second, and the Bs come last. You can only swap elements of the array.
+Do this in linear time and in-place.
+For example, given the array ['G', 'B', 'R', 'R', 'B', 'R', 'G'], it should become ['R', 'R', 'R', 'G', 'G', 'B', 'B'] */
+const orderRGB = (arr) => {
+    let numberGreen = 0;
+    let numberRed = 0;
+    let numberBlue = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] === "R") {
+            numberRed++
+        } else if(arr[i] === "G") {
+            numberGreen++
+        } else if(arr[i] === "B") {
+            numberBlue++
+        }
+    }
+
+    let res = []
+
+    for(let i = 0; i < numberRed; i++) {
+        res.push("R")
+    }
+    for(let i = 0; i < numberGreen; i++) {
+        res.push("G")
+    }
+    for(let i = 0; i < numberBlue; i++) {
+        res.push("B")
+    }
+
+    return res
+};
