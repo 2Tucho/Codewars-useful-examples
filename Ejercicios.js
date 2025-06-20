@@ -923,3 +923,54 @@ const orderRGB = (arr) => {
 
     return res
 };
+
+//DAILY CODING PROBLEM
+/* A builder is looking to build a row of N houses that can be of K different colors. He has a goal of minimizing cost while ensuring that no two neighboring houses are of the same color.
+Given an N by K matrix where the nth row and kth column represents the cost to build the nth house with kth color, return the minimum cost which achieves this goal. */
+function minCost(costs) {
+    if (!costs || costs.length === 0 || costs[0].length === 0) {
+        return 0;
+    }
+
+    const n = costs.length;    // Number of houses
+    const k = costs[0].length; // Number of colors
+
+    if (k === 1) {
+        return n === 1 ? costs[0][0] : Infinity; // Only one color, can't paint adjacent houses differently
+    }
+
+    // Initialize the DP array with the costs of the first house
+    let dp = [...costs[0]];
+
+    for (let i = 1; i < n; i++) {
+        // Find the minimum and second minimum costs from the previous house
+        let min1 = Infinity, min2 = Infinity;
+        for (let cost of dp) {
+            if (cost < min1) {
+                min2 = min1;
+                min1 = cost;
+            } else if (cost < min2) {
+                min2 = cost;
+            }
+        }
+
+        // Calculate the new costs for the current house
+        let newDp = [];
+        for (let j = 0; j < k; j++) {
+            // If the previous house was painted with color j, use the second minimum cost
+            // Otherwise, use the minimum cost
+            newDp[j] = costs[i][j] + (dp[j] === min1 ? min2 : min1);
+        }
+        dp = newDp;
+    }
+
+    // The answer is the minimum cost in the last row
+    return Math.min(...dp);
+}
+
+// Example usage
+const costes = [
+    [1, 5, 3],
+    [2, 9, 4]
+];
+console.log(minCost(costes)); // Output: 5 (1 + 4)
