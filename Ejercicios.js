@@ -899,25 +899,25 @@ const orderRGB = (arr) => {
     let numberRed = 0;
     let numberBlue = 0;
 
-    for(let i = 0; i < arr.length; i++) {
-        if(arr[i] === "R") {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === "R") {
             numberRed++
-        } else if(arr[i] === "G") {
+        } else if (arr[i] === "G") {
             numberGreen++
-        } else if(arr[i] === "B") {
+        } else if (arr[i] === "B") {
             numberBlue++
         }
     }
 
     let res = []
 
-    for(let i = 0; i < numberRed; i++) {
+    for (let i = 0; i < numberRed; i++) {
         res.push("R")
     }
-    for(let i = 0; i < numberGreen; i++) {
+    for (let i = 0; i < numberGreen; i++) {
         res.push("G")
     }
-    for(let i = 0; i < numberBlue; i++) {
+    for (let i = 0; i < numberBlue; i++) {
         res.push("B")
     }
 
@@ -974,3 +974,35 @@ const costes = [
     [2, 9, 4]
 ];
 console.log(minCost(costes)); // Output: 5 (1 + 4)
+
+//DAILY CODING PROBLEM 
+/* Given an array of time intervals (start, end) for classroom lectures (possibly overlapping), find the minimum number of rooms required.
+For example, given [[30, 75], [0, 50], [60, 150]], you should return 2. */
+function minClassrooms(intervals) {
+    if (intervals.length === 0) return 0;
+
+    // Sort intervals by start time
+    intervals.sort((a, b) => a[0] - b[0]);
+
+    // Initialize a list to keep track of end times of classrooms
+    let classrooms = [];
+
+    for (let [start, end] of intervals) {
+        // Check if any classroom is free (end time <= current start time)
+        let found = false;
+        for (let i = 0; i < classrooms.length; i++) {
+            if (classrooms[i] <= start) {
+                // Reuse this classroom
+                classrooms[i] = end;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            // Need a new classroom
+            classrooms.push(end);
+        }
+    }
+
+    return classrooms.length;
+}
