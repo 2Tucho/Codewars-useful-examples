@@ -924,7 +924,7 @@ const orderRGB = (arr) => {
     return res
 };
 
-//DAILY CODING PROBLEM
+//DAILY CODING PROBLEM (MEDIUM)
 /* A builder is looking to build a row of N houses that can be of K different colors. He has a goal of minimizing cost while ensuring that no two neighboring houses are of the same color.
 Given an N by K matrix where the nth row and kth column represents the cost to build the nth house with kth color, return the minimum cost which achieves this goal. */
 function minCost(costs) {
@@ -975,7 +975,7 @@ const costes = [
 ];
 console.log(minCost(costes)); // Output: 5 (1 + 4)
 
-//DAILY CODING PROBLEM 
+//DAILY CODING PROBLEM (EASY)
 /* Given an array of time intervals (start, end) for classroom lectures (possibly overlapping), find the minimum number of rooms required.
 For example, given [[30, 75], [0, 50], [60, 150]], you should return 2. */
 function minClassrooms(intervals) {
@@ -1005,4 +1005,38 @@ function minClassrooms(intervals) {
     }
 
     return classrooms.length;
+}
+
+//DAILY CODING PROBLEM (MEDIUM)
+/* Given a dictionary of words and a string made up of those words (no spaces), return the original sentence in a list. If there is more than one possible reconstruction, return any of them. If there is no possible reconstruction, then return null.
+For example, given the set of words 'quick', 'brown', 'the', 'fox', and the string "thequickbrownfox", you should return ['the', 'quick', 'brown', 'fox'].
+Given the set of words 'bed', 'bath', 'bedbath', 'and', 'beyond', and the string "bedbathandbeyond", return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond']. */
+function wordBreak(dict, s) {
+    const memo = new Map();
+    
+    // starts from a given index in the string and checks all possible substrings starting at that index. If a substring matches a word in the dictionary, it recursively processes the remaining string.
+    function backtrack(start) {
+        if (start === s.length) {
+            return [];
+        }
+        if (memo.has(start)) {
+            return memo.get(start);
+        }
+        
+        for (let end = start + 1; end <= s.length; end++) {
+            const word = s.substring(start, end);
+            if (dict.includes(word)) {
+                const rest = backtrack(end);
+                if (rest !== null) {
+                    memo.set(start, [word, ...rest]);
+                    return memo.get(start);
+                }
+            }
+        }
+        
+        memo.set(start, null);
+        return null;
+    }
+    
+    return backtrack(0);
 }
