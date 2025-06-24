@@ -1040,3 +1040,22 @@ function wordBreak(dict, s) {
     
     return backtrack(0);
 }
+
+//DAILY CODING PROBLEM (EASY)
+/* Run-length encoding is a fast and simple method of encoding strings. The basic idea is to represent repeated successive characters as a single count and character. For example, the string "AAAABBBCCDAA" would be encoded as "4A3B2C1D2A".
+Implement run-length encoding and decoding. You can assume the string to be encoded have no digits and consists solely of alphabetic characters. You can assume the string to be decoded is valid. */
+
+
+//DAILY CODING PROBLEM
+/* Implement regular expression matching with the following special characters:
+
+. (period) which matches any single character
+* (asterisk) which matches zero or more of the preceding element
+That is, implement a function that takes in a string and a valid regular expression and returns whether or not the string matches the regular expression.
+
+For example, given the regular expression "ra." and the string "ray", your function should return true. The same regular expression on the string "raymond" should return false.
+Given the regular expression ".*at" and the string "chat", your function should return true. The same regular expression on the string "chats" should return false. */
+const matchingRegex = (regex, string) => {
+    let regex = "/" + regex + "/"
+    
+}
