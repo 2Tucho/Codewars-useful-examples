@@ -1079,3 +1079,12 @@ As another example, given the string "google", you should return "elgoogle". */
 /* The power set of a set is the set of all its subsets. Write a function that, given a set, generates its power set.
 For example, given the set {1, 2, 3}, it should return {{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}.
 You may also use a list or array to represent a set. */
+
+//DAILY CODING PROBLEM
+/* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
+For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
+
+//DAILY CODING PROBLEM (HARD)
+/* Given a list of integers S and a target number k, write a function that returns a subset of S that adds up to k. If such a subset cannot be made, then return null.
+Integers can appear more than once in the list. You may assume all numbers in the list are positive.
+For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] since it sums up to 24. */
