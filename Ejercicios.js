@@ -1055,9 +1055,21 @@ That is, implement a function that takes in a string and a valid regular express
 
 For example, given the regular expression "ra." and the string "ray", your function should return true. The same regular expression on the string "raymond" should return false.
 Given the regular expression ".*at" and the string "chat", your function should return true. The same regular expression on the string "chats" should return false. */
-const matchingRegex = (regex, string) => {
-    let regex = "/" + regex + "/"
-    
+function isMatch(s, p) {
+    if (p.length === 0) {
+        return s.length === 0;
+    }
+
+    const firstMatch = s.length > 0 && (p[0] === s[0] || p[0] === '.');
+
+    if (p.length >= 2 && p[1] === '*') {
+        return (
+            isMatch(s, p.substring(2)) || // Match zero occurrences
+            (firstMatch && isMatch(s.substring(1), p)) // Match one or more occurrences
+        );
+    } else {
+        return firstMatch && isMatch(s.substring(1), p.substring(1));
+    }
 }
 
 //DAILY CODING PROBLEM (MEDIUM)
