@@ -1013,7 +1013,7 @@ For example, given the set of words 'quick', 'brown', 'the', 'fox', and the stri
 Given the set of words 'bed', 'bath', 'bedbath', 'and', 'beyond', and the string "bedbathandbeyond", return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond']. */
 function wordBreak(dict, s) {
     const memo = new Map();
-    
+
     // starts from a given index in the string and checks all possible substrings starting at that index. If a substring matches a word in the dictionary, it recursively processes the remaining string.
     function backtrack(start) {
         if (start === s.length) {
@@ -1022,7 +1022,7 @@ function wordBreak(dict, s) {
         if (memo.has(start)) {
             return memo.get(start);
         }
-        
+
         for (let end = start + 1; end <= s.length; end++) {
             const word = s.substring(start, end);
             if (dict.includes(word)) {
@@ -1033,18 +1033,32 @@ function wordBreak(dict, s) {
                 }
             }
         }
-        
+
         memo.set(start, null);
         return null;
     }
-    
+
     return backtrack(0);
 }
 
 //DAILY CODING PROBLEM (EASY)
 /* Run-length encoding is a fast and simple method of encoding strings. The basic idea is to represent repeated successive characters as a single count and character. For example, the string "AAAABBBCCDAA" would be encoded as "4A3B2C1D2A".
 Implement run-length encoding and decoding. You can assume the string to be encoded have no digits and consists solely of alphabetic characters. You can assume the string to be decoded is valid. */
-
+const runLengthEncoding = (string) => {
+    if (string.length === 0) return ""; // In case of empty string
+    let count = 1
+    let res = []
+    for (let i = 0; i < string.length; i++) {
+        if (i + 1 < string.length && string[i] === string[i + 1]) { // So i + 1 don't exceeds the string length, to evade problems with undefined comparations
+            count += 1
+        } else {
+            res.push(count)
+            res.push(string[i])
+            count = 1
+        }
+    }
+    return res.join("")
+}
 
 //DAILY CODING PROBLEM
 /* Implement regular expression matching with the following special characters:
