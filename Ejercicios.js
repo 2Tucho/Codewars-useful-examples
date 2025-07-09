@@ -1086,15 +1086,23 @@ function isMatch(s, p) {
     }
 }
 
-//DAILY CODING PROBLEM (MEDIUM)
-/* You are given an array of non-negative integers that represents a two-dimensional elevation map where each element is unit-width wall and the integer is the height. Suppose it will rain and all spots between two walls get filled up.
-Compute how many units of water remain trapped on the map in O(N) time and O(1) space.
-For example, given the input [2, 1, 2], we can hold 1 unit of water in the middle.
-Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in the second, and 3 in the fourth index (we cannot hold 5 since it would run off to the left), so we can trap 8 units of water. */
-
 //DAILY CODING PROBLEM (EASY)
 /* The edit distance between two strings refers to the minimum number of character insertions, deletions, and substitutions required to change one string to the other. For example, the edit distance between “kitten” and “sitting” is three: substitute the “k” for “s”, substitute the “e” for “i”, and append a “g”.
 Given two strings, compute the edit distance between them. */
+const editDistanceCounter = (a, b) => {
+    if (a.length === 0) return b.length
+    if (b.length === 0) return a.length
+
+    if (a[0] === b[0]) {
+        return editDistance(a.slice(1), b.slice(1))
+    }
+
+    return 1 + Math.min(
+        editDistance(a.slice(1), b),       // delete from a
+        editDistance(a, b.slice(1)),       // insert into a
+        editDistance(a.slice(1), b.slice(1)) // substitute
+    )
+}
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given a string, find the palindrome that can be made by inserting the fewest number of characters as possible anywhere in the word. If there is more than one palindrome of minimum length that can be made, return the lexicographically earliest one (the first one alphabetically).
