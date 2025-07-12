@@ -1106,6 +1106,34 @@ const editDistanceCounter = (a, b) => {
 
 //DAILY CODING PROBLEM (EASY)
 /* Given an array of integers, determine whether it contains a Pythagorean triplet. Recall that a Pythogorean triplet (a, b, c) is defined by the equation a2+ b2= c2. */
+const hasPythagoreanTriplet = (arr) => {
+    // Step 1: Square and sort the array
+    const squared = arr.map(x => x * x).sort((a, b) => a - b);
+
+    // Step 2: Iterate from the largest element (c)
+    for (let c = squared.length - 1; c >= 2; c--) {
+        let a = 0; // Pointer 1 (smallest)
+        let b = c - 1; // Pointer 2 (just before c)
+
+        // Step 3: Two-pointer search for a² + b² = c²
+        while (a < b) {
+            const sum = squared[a] + squared[b];
+            if (sum === squared[c]) {
+                return true; // Triplet found!
+            } else if (sum < squared[c]) {
+                a++; // Need a larger a
+            } else {
+                b--; // Need a smaller b
+            }
+        }
+    }
+    return false; // No triplet found
+};
+
+// Test cases
+console.log(hasPythagoreanTriplet([3, 1, 4, 5, 2])); // true (3² + 4² = 5²)
+console.log(hasPythagoreanTriplet([5, 3, 4])); // true (3² + 4² = 5²)
+console.log(hasPythagoreanTriplet([10, 2, 3])); // false
 
 //DAILY CODING PROBLEM (EASY)
 /* Given a array of numbers representing the stock prices of a company in chronological order, write a function that calculates the maximum profit you could have made from buying and selling that stock once. You must buy before you can sell it.
