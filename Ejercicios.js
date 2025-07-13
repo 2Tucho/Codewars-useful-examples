@@ -1138,6 +1138,27 @@ console.log(hasPythagoreanTriplet([10, 2, 3])); // false
 //DAILY CODING PROBLEM (EASY)
 /* Given a array of numbers representing the stock prices of a company in chronological order, write a function that calculates the maximum profit you could have made from buying and selling that stock once. You must buy before you can sell it.
 For example, given [9, 11, 8, 5, 7, 10], you should return 5, since you could buy the stock at 5 dollars and sell it at 10 dollars. */
+const getMaxProfit = (prices) => {
+    if (prices.length < 2) return 0; // Need at least two prices to buy and sell
+    
+    let minPrice = prices[0];
+    let maxProfit = 0;
+    
+    for (let i = 1; i < prices.length; i++) {
+        const currentPrice = prices[i];
+        const potentialProfit = currentPrice - minPrice; //The potential profit is calculated as the difference between the current price and the minPrice encountered so far
+        
+        if (potentialProfit > maxProfit) { //If this potential profit is greater than the maxProfit we have recorded, we update maxProfit
+            maxProfit = potentialProfit;
+        }
+        
+        if (currentPrice < minPrice) { //If the current price is lower than minPrice, we update minPrice to this price to ensure we are always considering the lowest buying price encountered so far for future profit calculations.
+            minPrice = currentPrice;
+        }
+    }
+    
+    return maxProfit;
+}
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given a string, find the palindrome that can be made by inserting the fewest number of characters as possible anywhere in the word. If there is more than one palindrome of minimum length that can be made, return the lexicographically earliest one (the first one alphabetically).
