@@ -11,6 +11,7 @@ NUMBERS
 
 LOOPS
     - While
+    - For
 
 ARRAY
     - Filter

@@ -1140,24 +1140,45 @@ console.log(hasPythagoreanTriplet([10, 2, 3])); // false
 For example, given [9, 11, 8, 5, 7, 10], you should return 5, since you could buy the stock at 5 dollars and sell it at 10 dollars. */
 const getMaxProfit = (prices) => {
     if (prices.length < 2) return 0; // Need at least two prices to buy and sell
-    
+
     let minPrice = prices[0];
     let maxProfit = 0;
-    
+
     for (let i = 1; i < prices.length; i++) {
         const currentPrice = prices[i];
         const potentialProfit = currentPrice - minPrice; //The potential profit is calculated as the difference between the current price and the minPrice encountered so far
-        
+
         if (potentialProfit > maxProfit) { //If this potential profit is greater than the maxProfit we have recorded, we update maxProfit
             maxProfit = potentialProfit;
         }
-        
-        if (currentPrice < minPrice) { //If the current price is lower than minPrice, we update minPrice to this price to ensure we are always considering the lowest buying price encountered so far for future profit calculations.
+
+        if (currentPrice < minPrice) { //If the current price is lower than minPrice, we update minPrice to this price to ensure we are always considering the lowest buying price encountered so far for future profit calculations
             minPrice = currentPrice;
         }
     }
-    
+
     return maxProfit;
+}
+
+//LOOP FOR
+/* Find the sum of all multiples of n below m
+n and m are natural numbers (positive integers)
+m is excluded from the multiples
+Examples
+sumMul(2, 9)   ==> 2 + 4 + 6 + 8 = 20
+sumMul(3, 13)  ==> 3 + 6 + 9 + 12 = 30
+sumMul(4, 123) ==> 4 + 8 + 12 + ... = 1860
+sumMul(4, -7)  ==> "INVALID" */
+function sumMul(n, m) {
+    let count = 0
+
+    for (let i = n; i < m; i += n) {
+        count += i;
+    }
+    
+    if (n > m || n == m) {
+        return "INVALID"
+    } else return count
 }
 
 //DAILY CODING PROBLEM (MEDIUM)
