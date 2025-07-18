@@ -1175,7 +1175,7 @@ function sumMul(n, m) {
     for (let i = n; i < m; i += n) {
         count += i;
     }
-    
+
     if (n > m || n == m) {
         return "INVALID"
     } else return count
@@ -1202,3 +1202,14 @@ For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] sin
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given a real number n, find the square root of n. For example, given n = 9, return 3. */
+
+//TURN A NUMBER INTO AN ARRAY
+/**/
+const sumLinkedLists = (list1, list2) => {
+    let list1 = list1.reverse()
+    let list2 = list2.reverse()
+
+    let sum = parseInt(list1.join("")) + parseInt(list2.join(""))
+
+    return sum.toString().split('').map(Number)
+}
