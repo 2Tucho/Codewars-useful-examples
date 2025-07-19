@@ -1213,3 +1213,12 @@ const sumLinkedLists = (list1, list2) => {
 
     return sum.toString().split('').map(Number)
 }
+
+//FUNCTION IN A FUNCTION
+/* Implement a function which filters out array values which satisfy the given predicate.
+reject([1, 2, 3, 4, 5, 6], (n) => n % 2 === 0)  =>  [1, 3, 5] */
+function reject(array, iterator) {
+  return array.filter(function(x) {return !iterator(x);});
+}
+
+const reject = (array, iterator) => array.filter(curr => !iterator(curr));
