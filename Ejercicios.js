@@ -1203,6 +1203,42 @@ For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] sin
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given a real number n, find the square root of n. For example, given n = 9, return 3. */
 
+//DAILY CODING PROBLEM (MEDIUM)
+/* Given an unordered list of flights taken by someone, each represented as (origin, destination) pairs, and a starting airport, compute the person's itinerary. If no such itinerary exists, return null. If there are multiple possible itineraries, return the lexicographically smallest one. All flights must be used in the itinerary.
+For example, given the list of flights [('SFO', 'HKO'), ('YYZ', 'SFO'), ('YUL', 'YYZ'), ('HKO', 'ORD')] and starting airport 'YUL', you should return the list ['YUL', 'YYZ', 'SFO', 'HKO', 'ORD'].
+Given the list of flights [('SFO', 'COM'), ('COM', 'YYZ')] and starting airport 'COM', you should return null.
+Given the list of flights [('A', 'B'), ('A', 'C'), ('B', 'C'), ('C', 'A')] and starting airport 'A', you should return the list ['A', 'B', 'C', 'A', 'C'] even though ['A', 'C', 'A', 'B', 'C'] is also a valid itinerary. However, the first one is lexicographically smaller. */
+function findItinerary(flights, start) {
+    // Sort flights alphabetically
+    flights.sort();
+
+    let current = start;
+    const itinerary = [current];
+    const used = new Set();
+
+    while (itinerary.length <= flights.length) {
+        let found = false;
+
+        // Find first unused flight matching current airport
+        for (let i = 0; i < flights.length; i++) {
+            if (!used.has(i) && flights[i][0] === current) {
+                used.add(i);
+                current = flights[i][1];
+                itinerary.push(current);
+                found = true;
+                break;
+            }
+        }
+
+        // If stuck and haven't used all flights
+        if (!found && itinerary.length <= flights.length) {
+            return null;
+        }
+    }
+
+    return itinerary;
+}
+
 //TURN A NUMBER INTO AN ARRAY
 /**/
 const sumLinkedLists = (list1, list2) => {
@@ -1218,7 +1254,7 @@ const sumLinkedLists = (list1, list2) => {
 /* Implement a function which filters out array values which satisfy the given predicate.
 reject([1, 2, 3, 4, 5, 6], (n) => n % 2 === 0)  =>  [1, 3, 5] */
 function reject(array, iterator) {
-  return array.filter(function(x) {return !iterator(x);});
+    return array.filter(function (x) { return !iterator(x); });
 }
 
 const reject = (array, iterator) => array.filter(curr => !iterator(curr));
