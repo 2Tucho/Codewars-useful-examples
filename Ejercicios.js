@@ -1199,6 +1199,23 @@ For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], retu
 /* Given a list of integers S and a target number k, write a function that returns a subset of S that adds up to k. If such a subset cannot be made, then return null.
 Integers can appear more than once in the list. You may assume all numbers in the list are positive.
 For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] since it sums up to 24. */
+const addsToK = (S, k) => {
+    const n = S.length;
+    // Generate all possible subsets
+    for (let mask = 1; mask < (1 << n); mask++) {
+        let sum = 0;
+        const subset = [];
+        for (let i = 0; i < n; i++) {
+            if (mask & (1 << i)) {
+                sum += S[i];
+                subset.push(S[i]);
+            }
+            if (sum > k) break; // Early exit if sum exceeds k
+        }
+        if (sum === k) return subset;
+    }
+    return null;
+}
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given an unordered list of flights taken by someone, each represented as (origin, destination) pairs, and a starting airport, compute the person's itinerary. If no such itinerary exists, return null. If there are multiple possible itineraries, return the lexicographically smallest one. All flights must be used in the itinerary.
