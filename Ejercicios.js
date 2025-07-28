@@ -1200,21 +1200,22 @@ For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], retu
 Integers can appear more than once in the list. You may assume all numbers in the list are positive.
 For example, given S = [12, 1, 61, 5, 9, 2] and k = 24, return [12, 9, 2, 1] since it sums up to 24. */
 const addsToK = (S, k) => {
-    const n = S.length;
-    // Generate all possible subsets
+    const n = S.length; // n = 6 (since S has 6 elements)
+    // Loop through all possible subsets (from 1 to 2^n - 1)
     for (let mask = 1; mask < (1 << n); mask++) {
         let sum = 0;
         const subset = [];
+        // Check each bit in the mask
         for (let i = 0; i < n; i++) {
-            if (mask & (1 << i)) {
-                sum += S[i];
-                subset.push(S[i]);
+            if (mask & (1 << i)) { // Is the i-th bit set?
+                sum += S[i];       // Add S[i] to sum
+                subset.push(S[i]); // Early exit if sum exceeds k
             }
             if (sum > k) break; // Early exit if sum exceeds k
         }
-        if (sum === k) return subset;
+        if (sum === k) return subset; // Return if subset sums to k
     }
-    return null;
+    return null; // No subset found
 }
 
 //DAILY CODING PROBLEM (MEDIUM)
