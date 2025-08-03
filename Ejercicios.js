@@ -1195,6 +1195,12 @@ You may also use a list or array to represent a set. */
 /* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
 For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
 
+//DAILY CODING PROBLEM
+/* There are N prisoners standing in a circle, waiting to be executed. The executions are carried out starting with the kth person, and removing every successive kth person going clockwise until there is no one left.
+Given N and k, write an algorithm to determine where a prisoner should stand in order to be the last survivor.
+For example, if N = 5 and k = 2, the order of executions would be [2, 4, 1, 5, 3], so you should return 3.
+Bonus: Find an O(log N) solution if k = 2. */
+
 //DAILY CODING PROBLEM (HARD)
 /* Given a list of integers S and a target number k, write a function that returns a subset of S that adds up to k. If such a subset cannot be made, then return null.
 Integers can appear more than once in the list. You may assume all numbers in the list are positive.
