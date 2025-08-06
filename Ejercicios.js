@@ -1170,7 +1170,7 @@ sumMul(3, 13)  ==> 3 + 6 + 9 + 12 = 30
 sumMul(4, 123) ==> 4 + 8 + 12 + ... = 1860
 sumMul(4, -7)  ==> "INVALID" */
 function sumMul(n, m) {
-    let count = 0
+    let count = 0;
 
     for (let i = n; i < m; i += n) {
         count += i;
@@ -1194,6 +1194,20 @@ You may also use a list or array to represent a set. */
 //DAILY CODING PROBLEM
 /* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
 For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
+function findSingle(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let count = 0;
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+                count++;
+            }
+        }
+        if (count === 1) {
+            return arr[i];
+        }
+    }
+    return null; // In case there's no unique number
+}
 
 //DAILY CODING PROBLEM
 /* There are N prisoners standing in a circle, waiting to be executed. The executions are carried out starting with the kth person, and removing every successive kth person going clockwise until there is no one left.
