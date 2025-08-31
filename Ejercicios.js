@@ -1313,3 +1313,29 @@ For example, given n = 16, return 3 since we can make it with a 10¢, a 5¢, and
 /* You are given n numbers as well as n probabilities that sum up to 1. Write a function to generate one of the numbers with its corresponding probability.
 For example, given the numbers [1, 2, 3, 4] and probabilities [0.1, 0.5, 0.2, 0.2], your function should return 1 10% of the time, 2 50% of the time, and 3 and 4 20% of the time.
 You can generate random numbers between 0 and 1 uniformly. */
+
+//DAILY CODING PROBLEM (EASY)
+/* Given an array and a number k that's smaller than the length of the array, rotate the array to the right k elements in-place. */
+function rotateRight(arr, k) {
+    const n = arr.length;
+    k = k % n; // Handle cases where k is larger than n
+    
+    for (let i = 0; i < k; i++) {
+        // Take the last element
+        const last = arr[n - 1];
+        
+        // Shift all elements to the right by one
+        for (let j = n - 1; j > 0; j--) {
+            arr[j] = arr[j - 1];
+        }
+        
+        // Place the last element at the front
+        arr[0] = last;
+    }
+    
+    return arr;
+}
+
+console.log(rotateRight([1, 2, 3, 4, 5], 2)); // Output: [4, 5, 1, 2, 3]
+console.log(rotateRight([1, 2, 3, 4, 5], 3)); // Output: [3, 4, 5, 1, 2]
+console.log(rotateRight([1, 2, 3, 4, 5], 7)); // Output: [4, 5, 1, 2, 3] (since 7 % 5 = 2)
