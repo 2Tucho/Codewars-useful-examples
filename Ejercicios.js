@@ -1339,3 +1339,8 @@ function rotateRight(arr, k) {
 console.log(rotateRight([1, 2, 3, 4, 5], 2)); // Output: [4, 5, 1, 2, 3]
 console.log(rotateRight([1, 2, 3, 4, 5], 3)); // Output: [3, 4, 5, 1, 2]
 console.log(rotateRight([1, 2, 3, 4, 5], 7)); // Output: [4, 5, 1, 2, 3] (since 7 % 5 = 2)
+
+//DAILY CODING PROBLEM (MEDIUM)
+/* Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+For example, given [100, 4, 200, 1, 3, 2], the longest consecutive element sequence is [1, 2, 3, 4]. Return its length: 4.
+Your algorithm should run in O(n) complexity. */
