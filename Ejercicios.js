@@ -1344,3 +1344,30 @@ console.log(rotateRight([1, 2, 3, 4, 5], 7)); // Output: [4, 5, 1, 2, 3] (since 
 /* Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
 For example, given [100, 4, 200, 1, 3, 2], the longest consecutive element sequence is [1, 2, 3, 4]. Return its length: 4.
 Your algorithm should run in O(n) complexity. */
+
+//DAILY CODING PROBLEM (EASY)
+/* Let's define a "sevenish" number to be one which is either a power of 7, or the sum of unique powers of 7. The first few sevenish numbers are 1, 7, 8, 49, and so on. Create an algorithm to find the nth sevenish number. */
+function nthSevenish(n) {
+    // Convert n to binary string
+    const binary = n.toString(2);
+    let result = 0;
+    let power = 1; // 7^0 = 1
+
+    // Process each binary digit from right to left
+    for (let i = binary.length - 1; i >= 0; i--) {
+        if (binary[i] === '1') {
+            result += power;
+        }
+        power *= 7;
+    }
+
+    return result;
+}
+
+console.log(nthSevenish(1)); // 1
+console.log(nthSevenish(2)); // 7
+console.log(nthSevenish(3)); // 8
+console.log(nthSevenish(4)); // 49
+console.log(nthSevenish(5)); // 50 (49 + 1)
+console.log(nthSevenish(6)); // 56 (49 + 7)
+console.log(nthSevenish(7)); // 57 (49 + 7 + 1)
