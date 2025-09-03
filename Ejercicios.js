@@ -382,6 +382,12 @@ function isOpposite(s1, s2) {
     } else return false;
 }
 
+//FUNCTION SCOPE
+/* Write a function that adds from two invocations.All inputs will be integers.
+add(3)(4)  // 7
+add(12)(20) // 32 */
+const add = a => b => a + b
+
 //BUBBLE SORT. SORT WITHOUT METHODS
 function bblSort(arr) {
 

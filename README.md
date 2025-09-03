@@ -21,6 +21,7 @@ ARRAY
 
 FUNCTIONS
     - Arguments
+    - Scope
 
 OBJECTS
     - Property-Value
