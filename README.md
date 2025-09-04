@@ -8,6 +8,7 @@ NUMBERS
     - Round Numbers
     - Factorial Number
     - Multiples
+    - Probabilities
 
 LOOPS
     - While
