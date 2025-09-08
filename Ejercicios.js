@@ -1404,3 +1404,37 @@ t     a     g
  h   s z   a
   i i   i z
    s     g */
+function printZigZag(s, k) {
+    if (k === 1) {
+        console.log(s);
+        return;
+    }
+    
+    // Create an array of k empty strings
+    const lines = new Array(k).fill('');
+    let currentLine = 0;
+    let goingDown = false; // Start by going down? Actually, we start at line 0, so we should go down first.
+
+    for (const char of s) {
+        // Add the character to the current line with appropriate spaces
+        for (let i = 0; i < k; i++) {
+            if (i === currentLine) {
+                lines[i] += char;
+            } else {
+                lines[i] += ' ';
+            }
+        }
+        
+        // Change direction if at the top or bottom
+        if (currentLine === 0 || currentLine === k - 1) {
+            goingDown = !goingDown;
+        }
+        
+        currentLine += goingDown ? 1 : -1;
+    }
+    
+    // Print each line
+    for (const line of lines) {
+        console.log(line);
+    }
+}
