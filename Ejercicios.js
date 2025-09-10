@@ -508,6 +508,51 @@ function encode(str) {
     return result.join("");
 }
 
+//ARRAY TRANSFORM
+/* Write a function that will encrypt a given sentence into International Morse Code, both the input and out puts will be strings.
+Characters should be separated by a single space. Words should be separated by a triple space.
+For example, "HELLO WORLD" should return -> ".... . .-.. .-.. --- .-- --- .-. .-.. -.." */
+let CHAR_TO_MORSE = { '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', a: '.-', h: '....', o: '---', u: '..-', b: '-...', i: '..', p: '.--.', v: '...-', c: '-.-.', j: '.---', q: '--.-', w: '.--', d: '-..', k: '-.-', r: '.-.', x: '-..-', e: '.', l: '.-..', s: '...', y: '-.--', f: '..-.', m: '--', t: '-', z: '--..', g: '--.', n: '-.', A: '.-', H: '....', O: '---', U: '..-', B: '-...', I: '..', P: '.--.', V: '...-', C: '-.-.', J: '.---', Q: '--.-', W: '.--', D: '-..', K: '-.-', R: '.-.', X: '-..-', E: '.', L: '.-..', S: '...', Y: '-.--', F: '..-.', M: '--', T: '-', Z: '--..', G: '--.', N: '-.' }
+const encryption = (message) => message.split("").map(l => l == " " ? " " : CHAR_TO_MORSE[l]).join(" ")
+
+/* You have to write a function which creates the following odd-numbers staircase pattern up to the desired number of rows.
+If the input is <= 0, return an empty string
+If the input is even, round it down to the odd number that precedes it.
+There are no spaces in the pattern
+The lines are separated by a newline character (\n)
+Examples:
+pattern(9):
+1
+333
+55555
+7777777
+999999999
+
+pattern(6):
+1
+333
+55555 */
+function pattern(n) {
+    let number = 0
+    let str = ""
+    if (n < 1) {
+        return ""
+    } else if (n % 2 == 0) {
+        number = n - 1
+    } else number = n
+
+    for (let i = 1; i <= number; i++) {
+        if (i % 2 == 0) {
+            str += "\n"
+        } else {
+            for (let j = 1; j <= i; j++) {
+                str += i
+            }
+        }
+    }
+    return str
+}
+
 //ARRAY FILTER
 /* It's Friday the 13th, and Jason is ready for his first killing spree!
 
@@ -1334,20 +1379,20 @@ You can generate random numbers between 0 and 1 uniformly. */
 function rotateRight(arr, k) {
     const n = arr.length;
     k = k % n; // Handle cases where k is larger than n
-    
+
     for (let i = 0; i < k; i++) {
         // Take the last element
         const last = arr[n - 1];
-        
+
         // Shift all elements to the right by one
         for (let j = n - 1; j > 0; j--) {
             arr[j] = arr[j - 1];
         }
-        
+
         // Place the last element at the front
         arr[0] = last;
     }
-    
+
     return arr;
 }
 
@@ -1409,7 +1454,7 @@ function printZigZag(s, k) {
         console.log(s);
         return;
     }
-    
+
     // Create an array of k empty strings
     const lines = new Array(k).fill('');
     let currentLine = 0;
@@ -1424,15 +1469,15 @@ function printZigZag(s, k) {
                 lines[i] += ' ';
             }
         }
-        
+
         // Change direction if at the top or bottom
         if (currentLine === 0 || currentLine === k - 1) {
             goingDown = !goingDown;
         }
-        
+
         currentLine += goingDown ? 1 : -1;
     }
-    
+
     // Print each line
     for (const line of lines) {
         console.log(line);
