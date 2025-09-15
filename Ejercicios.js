@@ -699,6 +699,20 @@ const balancedFilter = (arr) => {
     return res
 }
 
+//FILTERING STRINGS
+/* Create a function that takes an input String and returns a String, where all the uppercase words of the input String are in front and all the lowercase words at the end. The order of the uppercase and lowercase words should be the order in which they occur.
+If a word starts with a number or special character, skip the word and leave it out of the result.
+Input String will not be empty.
+For an input String: "hey You, Sort me Already!" the function should return: "You, Sort Already! hey me" */
+function capitalsFirst(str) {
+    let arr = str.split(" ").filter(elem => /^[a-zA-Z]/.test(elem[0]))
+
+    let mayusAdded = arr.filter(elem => elem.charAt(0).toUpperCase() == elem.charAt(0))
+    let minusAdded = arr.filter(elem => elem.charAt(0).toLowerCase() == elem.charAt(0))
+
+    return mayusAdded.concat(minusAdded).join(" ")
+}
+
 //ARRAY TRANSFORM
 /* Implement a function, so it will produce a sentence out of the given parts.
 
@@ -1525,26 +1539,26 @@ You should print out the following:
  */
 function printSpiral(matrix) {
     if (matrix.length === 0) return;
-    
+
     let top = 0;
     let bottom = matrix.length - 1;
     let left = 0;
     let right = matrix[0].length - 1;
     let result = [];
-    
+
     while (top <= bottom && left <= right) {
         // Print top row
         for (let i = left; i <= right; i++) {
             result.push(matrix[top][i]);
         }
         top++;
-        
+
         // Print right column
         for (let i = top; i <= bottom; i++) {
             result.push(matrix[i][right]);
         }
         right--;
-        
+
         // Print bottom row (if applicable)
         if (top <= bottom) {
             for (let i = right; i >= left; i--) {
@@ -1552,7 +1566,7 @@ function printSpiral(matrix) {
             }
             bottom--;
         }
-        
+
         // Print left column (if applicable)
         if (left <= right) {
             for (let i = bottom; i >= top; i--) {
@@ -1561,7 +1575,7 @@ function printSpiral(matrix) {
             left++;
         }
     }
-    
+
     // Print the result
     for (const num of result) {
         console.log(num);

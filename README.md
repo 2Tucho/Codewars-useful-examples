@@ -3,6 +3,7 @@ KIND OF EXERCISES
 STRINGS
     - Transform strings
     - Compare strings 
+    - Filter strings
 
 NUMBERS
     - Round Numbers
