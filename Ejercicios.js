@@ -713,6 +713,12 @@ function capitalsFirst(str) {
     return mayusAdded.concat(minusAdded).join(" ")
 }
 
+//ARRAY FILTER
+/* Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
+Example:
+["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...] */
+const removeEveryOther = arr => arr.filter((elem, index) => index % 2 === 0)
+
 //ARRAY TRANSFORM
 /* Implement a function, so it will produce a sentence out of the given parts.
 
@@ -1586,3 +1592,7 @@ function printSpiral(matrix) {
 /* You are given a string of length N and a parameter k. The string can be manipulated by taking one of the first k letters and moving it to the end.
 Write a program to determine the lexicographically smallest string that can be created after an unlimited number of moves.
 For example, suppose we are given the string daily and k = 1. The best we can create in this case is ailyd. */
+
+//DAILY CODING PROBLEM (EASY)
+/* The edit distance between two strings refers to the minimum number of character insertions, deletions, and substitutions required to change one string to the other. For example, the edit distance between “kitten” and “sitting” is three: substitute the “k” for “s”, substitute the “e” for “i”, and append a “g”.
+Given two strings, compute the edit distance between them. */
