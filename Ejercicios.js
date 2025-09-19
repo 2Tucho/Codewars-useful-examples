@@ -1600,3 +1600,29 @@ Given two strings, compute the edit distance between them. */
 //DAILY CODING PROBLEM (EASY)
 /* Using a read7() method that returns 7 characters from a file, implement readN(n) which reads n characters.
 For example, given a file with the content “Hello world”, three read7() returns “Hello w”, “orld” and then “”. */
+let buffer = '';
+
+function read7() {
+    // This is a mock function that returns 7 characters from a file.
+    // In a real scenario, this would read from an actual file.
+    // For example, it might return "Hello w" on first call, "orld" on second, and "" thereafter.
+    // Here, we simulate it by returning a fixed string for demonstration.
+    // You would replace this with actual file reading logic.
+    return "Hello world".substring(0, 7); // Mock implementation
+}
+
+function readN(n) {
+    while (buffer.length < n) {
+        let chunk = read7();
+        if (chunk === '') break; // No more data
+        buffer += chunk;
+    }
+    let result = buffer.substring(0, n);
+    buffer = buffer.substring(n);
+    return result;
+}
+
+// Example usage:
+console.log(readN(5)); // Reads first 5 characters: "Hello"
+console.log(readN(5)); // Reads next 5 characters: " worl"
+console.log(readN(5)); // Reads next 5 characters: "d" (only 1 left)
