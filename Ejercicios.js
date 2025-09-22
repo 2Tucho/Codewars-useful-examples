@@ -1642,3 +1642,6 @@ The board would look like this:
 [0 0 0 0 0]
 [b 0 0 0 0]
 You should return 2, since bishops 1 and 3 attack each other, as well as bishops 3 and 4. */
+
+//DAILY CODING PROBLEM (EASY)
+/* Boggle is a game played on a 4 x 4 grid of letters. The goal is to find as many words as possible that can be formed by a sequence of adjacent letters in the grid, using each cell at most once. Given a game board and a dictionary of valid words, implement a Boggle solver. */
