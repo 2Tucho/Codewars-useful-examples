@@ -1645,3 +1645,34 @@ You should return 2, since bishops 1 and 3 attack each other, as well as bishops
 
 //DAILY CODING PROBLEM (EASY)
 /* Boggle is a game played on a 4 x 4 grid of letters. The goal is to find as many words as possible that can be formed by a sequence of adjacent letters in the grid, using each cell at most once. Given a game board and a dictionary of valid words, implement a Boggle solver. */
+function betterBoggle(board, dictionary) {
+  const found = new Set();
+  
+  // Direcciones simples: derecha, abajo, diagonal-derecha-abajo
+  const directions = [[0, 1], [1, 0], [1, 1]];
+  
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      // Para cada dirección, formar palabras empezando en (i,j)
+      for (const [dx, dy] of directions) {
+        let word = '';
+        let x = i, y = j;
+        
+        // Formar palabra en esta dirección (máximo 4 letras)
+        for (let k = 0; k < 4 && x < 4 && y < 4; k++) {
+          word += board[x][y];
+          if (dictionary.includes(word)) {
+            found.add(word);
+          }
+          x += dx;
+          y += dy;
+        }
+      }
+    }
+  }
+  
+  return Array.from(found);
+}
+
+console.log(betterBoggle(board, dictionary));
+// Output: ['cat', 'dog', 'desk', 'fish', 'red']
