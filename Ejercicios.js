@@ -1642,6 +1642,37 @@ The board would look like this:
 [0 0 0 0 0]
 [b 0 0 0 0]
 You should return 2, since bishops 1 and 3 attack each other, as well as bishops 3 and 4. */
+function countAttackingPairs(M, bishops) {
+    let diag1 = {}; // For row - column
+    let diag2 = {}; // For row + column
+
+    // Count bishops on each diagonal
+    for (let [row, col] of bishops) {
+        let d1 = row - col;
+        let d2 = row + col;
+
+        diag1[d1] = (diag1[d1] || 0) + 1;
+        diag2[d2] = (diag2[d2] || 0) + 1;
+    }
+
+    // Calculate pairs for each diagonal
+    let pairs = 0;
+    for (let key in diag1) {
+        let count = diag1[key];
+        pairs += count * (count - 1) / 2;
+    }
+    for (let key in diag2) {
+        let count = diag2[key];
+        pairs += count * (count - 1) / 2;
+    }
+
+    return pairs;
+}
+
+// Example usage
+let M = 5;
+let bishops = [[0, 0], [1, 2], [2, 2], [4, 0]];
+console.log(countAttackingPairs(M, bishops)); // Output: 2
 
 //DAILY CODING PROBLEM (EASY)
 /* Boggle is a game played on a 4 x 4 grid of letters. The goal is to find as many words as possible that can be formed by a sequence of adjacent letters in the grid, using each cell at most once. Given a game board and a dictionary of valid words, implement a Boggle solver. */
