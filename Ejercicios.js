@@ -1708,6 +1708,10 @@ function betterBoggle(board, dictionary) {
 console.log(betterBoggle(board, dictionary));
 // Output: ['cat', 'dog', 'desk', 'fish', 'red']
 
-//
+//DAILY CODING PROBLEM (EASY)
 /* Given a string, determine whether any permutation of it is a palindrome.
 For example, carrace should return true, since it can be rearranged to form racecar, which is a palindrome. daily should return false, since there's no rearrangement that can form a palindrome. */
+
+//DAILY CODING PROBLEM (MEDIUM)
+/* Given the sequence of keys visited by a postorder traversal of a binary search tree, reconstruct the tree.
+For example, given the sequence 2, 4, 3, 8, 7, 5, you should construct the following tree: */
