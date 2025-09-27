@@ -1711,6 +1711,30 @@ console.log(betterBoggle(board, dictionary));
 //DAILY CODING PROBLEM (EASY)
 /* Given a string, determine whether any permutation of it is a palindrome.
 For example, carrace should return true, since it can be rearranged to form racecar, which is a palindrome. daily should return false, since there's no rearrangement that can form a palindrome. */
+function canFormPalindrome(str) {
+    // Step 1: Count character frequencies
+    const charCount = {};
+    for (const char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+    
+    // Step 2: Count how many characters have odd frequencies
+    let oddCount = 0;
+    for (const count of Object.values(charCount)) {
+        if (count % 2 !== 0) {
+            oddCount++;
+        }
+    }
+    
+    // Step 3: Check palindrome condition
+    return oddCount <= 1;
+}
+
+// Test cases
+console.log(canFormPalindrome("carrace")); // true
+console.log(canFormPalindrome("daily"));   // false
+console.log(canFormPalindrome("aab"));     // true ("aba" is palindrome)
+console.log(canFormPalindrome("aaab"));    // false
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given the sequence of keys visited by a postorder traversal of a binary search tree, reconstruct the tree.
