@@ -760,10 +760,45 @@ Should return false because there is only 1 'd' in the passed in array and there
 function makesTheSentence(characterArray, sentenceString) {
     let arr = characterArray.sort().join("") //.sort() porque solo necesito saber que tienen los mismos carcateres
     let str = sentenceString.split("").filter(elem => elem != " ").sort().join("")
-    
-    if(arr == str) {
-      return true
+
+    if (arr == str) {
+        return true
     } else return false
+}
+
+// ARRAY FILTER
+/* Punky loves wearing different colored socks, but Henry can't stand it.
+Given an array of different colored socks, return a pair depending on who was picking them out.
+Example:
+getSocks('Punky', ['red','blue','blue','green']) -> ['red', 'blue']
+Note that Punky can have any two colored socks, in any order, as long as they are different and both exist. Henry always picks a matching pair.
+If there is no possible combination of socks, return an empty array. */
+function getSocks(name, socks) {
+    let arr = []
+    let henry
+    let punky = []
+
+    console.log(socks.filter(elem => elem == "blue"))
+
+    for (let i = 0; i < socks.length; i++) {
+        arr = socks.filter(elem => elem == socks[i])
+
+        // ✅ CORREGIDO: >= 2 en lugar de > 2
+        if (arr.length >= 2 && !henry) {
+            henry = [socks[i], socks[i]]  // ✅ Devuelve dos del mismo color
+        }
+
+        // ✅ Para Punky, buscar colores diferentes
+        if (punky.length < 2 && !punky.includes(socks[i])) {
+            punky.push(socks[i])
+        }
+    }
+
+    if (name == "Punky") {
+        return punky.length === 2 ? punky.slice(0, 2) : []  // ✅ Solo si tiene 2 diferentes
+    } else if (name == "Henry") {
+        return henry.slice(0, 2) || []  // ✅ Henry o array vacío si no encuentra
+    }
 }
 
 //ARRAY FILTER
@@ -1696,32 +1731,32 @@ console.log(countAttackingPairs(M, bishops)); // Output: 2
 //DAILY CODING PROBLEM (EASY)
 /* Boggle is a game played on a 4 x 4 grid of letters. The goal is to find as many words as possible that can be formed by a sequence of adjacent letters in the grid, using each cell at most once. Given a game board and a dictionary of valid words, implement a Boggle solver. */
 function betterBoggle(board, dictionary) {
-  const found = new Set();
-  
-  // Direcciones simples: derecha, abajo, diagonal-derecha-abajo
-  const directions = [[0, 1], [1, 0], [1, 1]];
-  
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      // Para cada dirección, formar palabras empezando en (i,j)
-      for (const [dx, dy] of directions) {
-        let word = '';
-        let x = i, y = j;
-        
-        // Formar palabra en esta dirección (máximo 4 letras)
-        for (let k = 0; k < 4 && x < 4 && y < 4; k++) {
-          word += board[x][y];
-          if (dictionary.includes(word)) {
-            found.add(word);
-          }
-          x += dx;
-          y += dy;
+    const found = new Set();
+
+    // Direcciones simples: derecha, abajo, diagonal-derecha-abajo
+    const directions = [[0, 1], [1, 0], [1, 1]];
+
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            // Para cada dirección, formar palabras empezando en (i,j)
+            for (const [dx, dy] of directions) {
+                let word = '';
+                let x = i, y = j;
+
+                // Formar palabra en esta dirección (máximo 4 letras)
+                for (let k = 0; k < 4 && x < 4 && y < 4; k++) {
+                    word += board[x][y];
+                    if (dictionary.includes(word)) {
+                        found.add(word);
+                    }
+                    x += dx;
+                    y += dy;
+                }
+            }
         }
-      }
     }
-  }
-  
-  return Array.from(found);
+
+    return Array.from(found);
 }
 
 console.log(betterBoggle(board, dictionary));
@@ -1736,7 +1771,7 @@ function canFormPalindrome(str) {
     for (const char of str) {
         charCount[char] = (charCount[char] || 0) + 1;
     }
-    
+
     // Step 2: Count how many characters have odd frequencies
     let oddCount = 0;
     for (const count of Object.values(charCount)) {
@@ -1744,7 +1779,7 @@ function canFormPalindrome(str) {
             oddCount++;
         }
     }
-    
+
     // Step 3: Check palindrome condition
     return oddCount <= 1;
 }
