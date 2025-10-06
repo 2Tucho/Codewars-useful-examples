@@ -196,6 +196,58 @@ const shuffleArray = (arr) => {
     return shuffled;
 };
 
+// LOOP FOR
+/* Your task is to return the number of visible dots on a die after it has been rolled(that means the total count of dots that would not be touching the table when rolled)
+6, 8, 10, 12, 20 sided dice are the possible inputs for "numOfSides"
+topNum is equal to the number that is on top, or the number that was rolled.
+for this exercise, all opposite faces add up to be 1 more than the total amount of sides Example: 6 sided die would have 6 opposite 1, 4 opposite 3, and so on. for this exercise, the 10 sided die starts at 1 and ends on 10.
+Note: topNum will never be greater than numOfSides */
+function totalAmountVisible(topNum, numOfSides){
+  let total = 0
+  for(let i = 1; i <= numOfSides; i++) {
+    total += i
+  }
+  return total - ((numOfSides + 1) - topNum)
+}
+const totalAmountVisible = (topNum, numOfSides) => (numOfSides * numOfSides + numOfSides) / 2 - (numOfSides - topNum + 1)
+
+//DATE
+/* Create a function that returns a villain name based on the user's birthday. The birthday will be passed to the function as a valid Date object, so for simplicity, there's no need to worry about converting strings to dates.
+The first name will come from the month, and the last name will come from the last digit of the day:
+Month -> first name
+January -> "The Evil"
+February -> "The Vile"
+March -> "The Cruel"
+April -> "The Trashy"
+May -> "The Despicable"
+June -> "The Embarrassing"
+July -> "The Disreputable"
+August -> "The Atrocious"
+September -> "The Twirling"
+October -> "The Orange"
+November -> "The Terrifying"
+December -> "The Awkward"
+Last digit of day -> last name
+0 -> "Mustache"
+1 -> "Pickle"
+2 -> "Hood Ornament"
+3 -> "Raisin"
+4 -> "Recycling Bin"
+5 -> "Potato"
+6 -> "Tomato"
+7 -> "House Cat"
+8 -> "Teaspoon"
+9 -> "Laundry Basket"
+The returned value should be a string in the form of "First Name Last Name".
+For example, a birthday of November 18 would return "The Terrifying Teaspoon" */
+function getVillainName(birthday){
+  const m = ["Evil","Vile","Cruel","Trashy","Despicable","Embarrassing","Disreputable","Atrocious","Twirling","Orange","Terrifying","Awkward"];
+  const d = ["Mustache","Pickle","Hood Ornament","Raisin","Recycling Bin","Potato","Tomato","House Cat","Teaspoon","Laundry Basket"];
+  
+  let day = birthday.getDate().toString()
+  return "The " + m[birthday.getMonth()] + " " + d[day[day.length - 1]]
+}
+
 //FILTER AND TRANSFORM A STRING
 /* Given a string (str) containing a base-10 integer between 0 and 10000, convert the integer to its binary representation. At that point, obtain a count of the maximum amount of consecutive 0s. From there, return the count in written form with a capital letter.
 
