@@ -1905,3 +1905,10 @@ There is 1 smaller element to the right of 4
 There are 2 smaller elements to the right of 9
 There is 1 smaller element to the right of 6
 There are no smaller elements to the right of 1 */
+
+//DAILY CODING PROBLEM (HARD)
+/* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
+For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
+const onceOccuringInteger = array => {
+    
+}
