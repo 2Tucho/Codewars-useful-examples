@@ -202,12 +202,12 @@ const shuffleArray = (arr) => {
 topNum is equal to the number that is on top, or the number that was rolled.
 for this exercise, all opposite faces add up to be 1 more than the total amount of sides Example: 6 sided die would have 6 opposite 1, 4 opposite 3, and so on. for this exercise, the 10 sided die starts at 1 and ends on 10.
 Note: topNum will never be greater than numOfSides */
-function totalAmountVisible(topNum, numOfSides){
-  let total = 0
-  for(let i = 1; i <= numOfSides; i++) {
-    total += i
-  }
-  return total - ((numOfSides + 1) - topNum)
+function totalAmountVisible(topNum, numOfSides) {
+    let total = 0
+    for (let i = 1; i <= numOfSides; i++) {
+        total += i
+    }
+    return total - ((numOfSides + 1) - topNum)
 }
 const totalAmountVisible = (topNum, numOfSides) => (numOfSides * numOfSides + numOfSides) / 2 - (numOfSides - topNum + 1)
 
@@ -240,12 +240,12 @@ Last digit of day -> last name
 9 -> "Laundry Basket"
 The returned value should be a string in the form of "First Name Last Name".
 For example, a birthday of November 18 would return "The Terrifying Teaspoon" */
-function getVillainName(birthday){
-  const m = ["Evil","Vile","Cruel","Trashy","Despicable","Embarrassing","Disreputable","Atrocious","Twirling","Orange","Terrifying","Awkward"];
-  const d = ["Mustache","Pickle","Hood Ornament","Raisin","Recycling Bin","Potato","Tomato","House Cat","Teaspoon","Laundry Basket"];
-  
-  let day = birthday.getDate().toString()
-  return "The " + m[birthday.getMonth()] + " " + d[day[day.length - 1]]
+function getVillainName(birthday) {
+    const m = ["Evil", "Vile", "Cruel", "Trashy", "Despicable", "Embarrassing", "Disreputable", "Atrocious", "Twirling", "Orange", "Terrifying", "Awkward"];
+    const d = ["Mustache", "Pickle", "Hood Ornament", "Raisin", "Recycling Bin", "Potato", "Tomato", "House Cat", "Teaspoon", "Laundry Basket"];
+
+    let day = birthday.getDate().toString()
+    return "The " + m[birthday.getMonth()] + " " + d[day[day.length - 1]]
 }
 
 //FILTER AND TRANSFORM A STRING
@@ -869,28 +869,28 @@ array_info([1,2,3.33,4,5.01,'bass','kick',' '])--------->[[8],[3],[2],[2],[1]]
 array_info([0.001,2,' '])------------------------------>[[3],[1],[1],[None],[1]]   
 array_info([])----------------------------------------->'Nothing in the array!'
 array_info([' '])-------------------------------------->[[1],[None],[None],[None],[1]] */
-function arrayInfo(arr){
-  let integer = 0
-  let float = 0
-  let string = 0
-  let whitespaces = 0
-  let res 
-  for(let i = 0; i < arr.length; i++) {
-    if(arr[i] === " ") {
-      whitespaces += 1
-    } else if(typeof arr[i] === "string" ) {
-      string += 1
-    } else if(typeof arr[i] === "number" && arr[i] % 1 == 0) {
-      integer += 1
-    } else if(typeof arr[i] === "number" && arr[i] % 1 !== 0) {
-      float += 1
-    } 
-  }
-  res = [[arr.length], [integer], [float], [string], [whitespaces]]
-  res = res.map(elem => elem[0] == 0 ? [null] : elem)
-  if(arr.length == 0) {
-    return "Nothing in the array!"
-  } else return res
+function arrayInfo(arr) {
+    let integer = 0
+    let float = 0
+    let string = 0
+    let whitespaces = 0
+    let res
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === " ") {
+            whitespaces += 1
+        } else if (typeof arr[i] === "string") {
+            string += 1
+        } else if (typeof arr[i] === "number" && arr[i] % 1 == 0) {
+            integer += 1
+        } else if (typeof arr[i] === "number" && arr[i] % 1 !== 0) {
+            float += 1
+        }
+    }
+    res = [[arr.length], [integer], [float], [string], [whitespaces]]
+    res = res.map(elem => elem[0] == 0 ? [null] : elem)
+    if (arr.length == 0) {
+        return "Nothing in the array!"
+    } else return res
 }
 
 //STRING TRANSFORM
@@ -900,13 +900,13 @@ However, when a noun STARTS and ENDS with the same letter, she likes to repeat t
 "alaska" -> "Alaskalaska"
 Complete the function that takes a noun as a string, and returns her preferred band name written as a string. */
 function bandNameGenerator(str) {
-  let res = ""
-  if(str[0] === str[str.length-1]) {
-    res = str[0].toUpperCase() + str.slice(1,str.length) + str.slice(1,str.length)
-  } else res = "The " + str[0].toUpperCase() + str.slice(1,str.length)
-  return res
+    let res = ""
+    if (str[0] === str[str.length - 1]) {
+        res = str[0].toUpperCase() + str.slice(1, str.length) + str.slice(1, str.length)
+    } else res = "The " + str[0].toUpperCase() + str.slice(1, str.length)
+    return res
 }
-const bandNameGenerator = (str) => str[0] === str[str.length-1] ? str[0].toUpperCase() + str.slice(1,str.length) + str.slice(1,str.length) : "The " + str[0].toUpperCase() + str.slice(1,str.length)
+const bandNameGenerator = (str) => str[0] === str[str.length - 1] ? str[0].toUpperCase() + str.slice(1, str.length) + str.slice(1, str.length) : "The " + str[0].toUpperCase() + str.slice(1, str.length)
 
 //ARRAY FILTER
 /* Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
@@ -1910,5 +1910,17 @@ There are no smaller elements to the right of 1 */
 /* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
 For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
 const onceOccuringInteger = array => {
-    
+    let count = 0
+    let res = 0
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length; j++) {
+            if (array[i] === array[j]) {
+                count += 1
+            }
+        }
+        if (count < 3) {
+            res = array[i]
+        }
+        count = 0
+    }
 }
