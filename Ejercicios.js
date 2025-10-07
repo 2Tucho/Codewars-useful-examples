@@ -1910,17 +1910,17 @@ There are no smaller elements to the right of 1 */
 /* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
 For example, given [6, 1, 3, 3, 3, 6, 6], return 1. Given [13, 19, 13, 13], return 19. */
 const onceOccuringInteger = array => {
-    let count = 0
     let res = 0
     for (let i = 0; i < array.length; i++) {
+        let count = 0 //Aquí porque solo se utiliza dentro del bucle, en ningún sitio más 
         for (let j = 0; j < array.length; j++) {
             if (array[i] === array[j]) {
-                count += 1
+                count ++ //count += 1
             }
         }
-        if (count < 3) {
-            res = array[i]
+        if (count === 1) {
+            return array[i]
         }
-        count = 0
     }
+    return null
 }
