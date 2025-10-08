@@ -637,6 +637,28 @@ function validPhoneNumber(phoneNumber) {
     /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
 }
 
+//STRING TO NUMBER
+/* You are given a string of words and numbers. Extract the expression including:
+the operator: either addition ("gains") or subtraction ("loses")
+the two numbers that we are operating on
+Return the result of the calculation.
+Notes:
+"loses" and "gains" are the only two words describing operators
+No fruit debts nor bitten apples = The numbers are integers and no negatives
+Examples
+"Panda has 48 apples and loses 4"  -->  44
+"Jerry has 34 apples and gains 6"  -->  40 */
+function calculate(string) {
+    let arr = string.split(" ")
+    let nums = arr.map(elem => parseInt(elem)).filter(elem => !isNaN(elem))
+    if (arr.find(elem => elem === "gains")) {
+        return nums[0] + nums[1]
+    } else if (arr.find(elem => elem === "loses")) {
+        return nums[0] - nums[1]
+    } else return null
+}
+const calculate = string => eval(string.replace('loses','-').replace('gains','+').replace(/[a-zA-Z]/g,''));
+
 //FILTER ELEMENTS IN AN ARRAY
 /* Determine whether a non-negative integer number is colorful or not.
 
@@ -1915,7 +1937,7 @@ const onceOccuringInteger = array => {
         let count = 0 //Aquí porque solo se utiliza dentro del bucle, en ningún sitio más 
         for (let j = 0; j < array.length; j++) {
             if (array[i] === array[j]) {
-                count ++ //count += 1
+                count++ //count += 1
             }
         }
         if (count === 1) {
