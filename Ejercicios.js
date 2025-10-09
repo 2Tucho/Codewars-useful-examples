@@ -637,7 +637,7 @@ function validPhoneNumber(phoneNumber) {
     /* Must star with 3 numbers in a parenthesis, followed by an space, another 3 numbers and a - and finish with 4 numbers */
 }
 
-//STRING TO NUMBER
+//TRANSFORM STRING (TO NUMBER)
 /* You are given a string of words and numbers. Extract the expression including:
 the operator: either addition ("gains") or subtraction ("loses")
 the two numbers that we are operating on
@@ -657,7 +657,7 @@ function calculate(string) {
         return nums[0] - nums[1]
     } else return null
 }
-const calculate = string => eval(string.replace('loses','-').replace('gains','+').replace(/[a-zA-Z]/g,''));
+const calculate = string => eval(string.replace('loses', '-').replace('gains', '+').replace(/[a-zA-Z]/g, ''));
 
 //FILTER ELEMENTS IN AN ARRAY
 /* Determine whether a non-negative integer number is colorful or not.
@@ -1927,6 +1927,19 @@ There is 1 smaller element to the right of 4
 There are 2 smaller elements to the right of 9
 There is 1 smaller element to the right of 6
 There are no smaller elements to the right of 1 */
+const arrayOfSmallerNums = arr => {
+    let res = []
+    for (let i = 0; i < arr.length; i++) {
+        let count = 0
+        for (let j = i; j < arr.length; j++) { // j = i para que que empiece desde el propio número, así correrá solo hacia la derecha
+            if (arr[i] > arr[j]) {
+                count++
+            }
+        }
+        res.push(count)
+    }
+    return res
+}
 
 //DAILY CODING PROBLEM (HARD)
 /* Given an array of integers where every integer occurs three times except for one integer, which only occurs once, find and return the non-duplicated integer.
