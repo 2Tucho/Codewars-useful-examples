@@ -965,6 +965,32 @@ function mineLocation(field) {
     }
 }
 
+//ARRAY ORDER
+/* Complete the function. Two arguments will be given:
+arr: An array that contains some integers (positve,negative or zero).
+n: A positive integer. 1 <= n <= arr.length.
+Your task is to find the minimum value of each n adjacent elements in arr. Returns by a new array. For example:
+arr = [1,2,3,10,-5], n = 2   ==>  [1,2,3,-5]
+# The min value of each 2 adjacent elements are:
+[(1,2)...]   --> 1
+[.(2,3)..]   --> 2
+[..(3,10).]  --> 3
+[...(10,-5)] --> -5
+Some Examples
+[1,-2,3,-4,5,-6,7,8], 1  ==>  [1,-2,3,-4,5,-6,7,8]
+[1,-2,3,-4,5,-6,7,8], 2  ==>  [-2,-2,-4,-4,-6,-6,7]
+[1,-2,3,-4,5,-6,7,8], 3  ==>  [-2,-4,-4,-6,-6,-6]
+[1,-2,3,-4,5,-6,7,8], 4  ==>  [-4,-4,-6,-6,-6] */
+function minValue(arr, n) {
+    let res = []
+    let num = n
+    for (let i = 0; num <= arr.length; i++) {
+        res.push(Math.min(...arr.slice(i, num)))
+        num++
+    }
+    return res
+}
+
 //ARRAY FILTER
 /* Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
 
