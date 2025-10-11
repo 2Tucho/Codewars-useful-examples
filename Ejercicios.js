@@ -930,6 +930,23 @@ function bandNameGenerator(str) {
 }
 const bandNameGenerator = (str) => str[0] === str[str.length - 1] ? str[0].toUpperCase() + str.slice(1, str.length) + str.slice(1, str.length) : "The " + str[0].toUpperCase() + str.slice(1, str.length)
 
+//LOOP FOR
+/* Write a function that accepts an integer argument n and generates an array containing the pairs of integers [a, b] that satisfy the condition
+0 <= a <= b <= n
+The pairs should be sorted by increasing values of a, then by increasing values of b.
+For example,
+for input: 2
+it should return: [  [0, 0], [0, 1], [0, 2],  [1, 1], [1, 2],  [2, 2] */
+function generatePairs(n) {
+  let res = []
+  for(let i = 0; i <= n; i++) {
+    for(let j = i; j <= n; j++) {
+      res.push([i, j])  
+    }
+  }
+  return res
+}
+
 //ARRAY FILTER
 /* Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
 
