@@ -930,6 +930,67 @@ function bandNameGenerator(str) {
 }
 const bandNameGenerator = (str) => str[0] === str[str.length - 1] ? str[0].toUpperCase() + str.slice(1, str.length) + str.slice(1, str.length) : "The " + str[0].toUpperCase() + str.slice(1, str.length)
 
+//LOOP FOR
+/* Write a function that accepts an integer argument n and generates an array containing the pairs of integers [a, b] that satisfy the condition
+0 <= a <= b <= n
+The pairs should be sorted by increasing values of a, then by increasing values of b.
+For example,
+for input: 2
+it should return: [  [0, 0], [0, 1], [0, 2],  [1, 1], [1, 2],  [2, 2] */
+function generatePairs(n) {
+    let res = []
+    for (let i = 0; i <= n; i++) {
+        for (let j = i; j <= n; j++) {
+            res.push([i, j])
+        }
+    }
+    return res
+}
+
+//LOOP FOR
+/* You've just discovered a square (NxN) field and you notice a warning sign. The sign states that there's a single bomb in the 2D grid-like field in front of you.
+Write a function that accepts a 2D array, and returns the location of the mine. The mine is represented as the integer 1 in the 2D array. Areas in the 2D array that are not the mine will be represented as 0s.
+The location returned should be an array (Tuple<int, int> in C#, RAX:RDX in NASM) where the first element is the row index, and the second element is the column index of the bomb location (both should be 0 based). All 2D arrays passed into your function will be a square (NxN), and there will only be one mine in the array.
+Examples (Input --> Output)
+[ [1, 0, 0], [0, 0, 0], [0, 0, 0] ] --> [0, 0]
+[ [0, 0, 0], [0, 1, 0], [0, 0, 0] ] --> [1, 1]
+[ [0, 0, 0], [0, 0, 0], [0, 1, 0] ] --> [2, 1] */
+function mineLocation(field) {
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field.length; j++) {
+            if (field[i][j] === 1) {
+                return [i, j]
+            }
+        }
+    }
+}
+
+//ARRAY ORDER
+/* Complete the function. Two arguments will be given:
+arr: An array that contains some integers (positve,negative or zero).
+n: A positive integer. 1 <= n <= arr.length.
+Your task is to find the minimum value of each n adjacent elements in arr. Returns by a new array. For example:
+arr = [1,2,3,10,-5], n = 2   ==>  [1,2,3,-5]
+# The min value of each 2 adjacent elements are:
+[(1,2)...]   --> 1
+[.(2,3)..]   --> 2
+[..(3,10).]  --> 3
+[...(10,-5)] --> -5
+Some Examples
+[1,-2,3,-4,5,-6,7,8], 1  ==>  [1,-2,3,-4,5,-6,7,8]
+[1,-2,3,-4,5,-6,7,8], 2  ==>  [-2,-2,-4,-4,-6,-6,7]
+[1,-2,3,-4,5,-6,7,8], 3  ==>  [-2,-4,-4,-6,-6,-6]
+[1,-2,3,-4,5,-6,7,8], 4  ==>  [-4,-4,-6,-6,-6] */
+function minValue(arr, n) {
+    let res = []
+    let num = n
+    for (let i = 0; num <= arr.length; i++) {
+        res.push(Math.min(...arr.slice(i, num)))
+        num++
+    }
+    return res
+}
+
 //ARRAY FILTER
 /* Greed is a dice game played with five six-sided dice. Your mission, should you choose to accept it, is to score a throw according to these rules. You will always be given an array with five six-sided dice values.
 
