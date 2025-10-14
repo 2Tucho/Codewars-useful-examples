@@ -2025,3 +2025,9 @@ const onceOccuringInteger = array => {
 /* The ancient Egyptians used to express fractions as a sum of several terms where each numerator is one. For example, 4 / 13 can be represented as 1 / 4 + 1 / 18 + 1 / 468.
 Create an algorithm to turn an ordinary fraction a / b, where a < b, into an Egyptian fraction. */
 // El rollo es que, como el numerador solo puede ser uno, que haga una fracción con lo que reste de hacerlo 1 o algo así
+
+//DAILY CODING PROBLEM (MEDIUM)
+/* An sorted array of integers was rotated an unknown number of times.
+Given such an array, find the index of the element in the array in faster than linear time. If the element doesn't exist in the array, return null.
+For example, given the array [13, 18, 25, 2, 8, 10] and the element 8, return 4 (the index of 8 in the array).
+You can assume all the integers in the array are unique. */
