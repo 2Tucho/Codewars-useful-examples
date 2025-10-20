@@ -2064,3 +2064,36 @@ For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17. *
 For example, given the array [10, 5, 7], you should return true, since we can modify the 10 into a 1 to make the array non-decreasing.
 Given the array [10, 5, 1], you should return false, since we can't modify any one element to get a non-decreasing array. */
 /*El truco sería hacer un contador y con un bucle for comprobar cuántas veces el numero que se está viendo es menor que el siguiente. Si el resultado final de count es menor que 1 significa que cambiando ese número sería posible hacer lo que dice el enunciado y retornaría true. Sino sería false*/
+const couldBeNonDecreasingArray = array => {
+    let count = 0;
+
+    for (let i = 1; i < array.length; i++) {
+        // Check if current element is smaller than previous
+        if (array[i] < array[i - 1]) {
+            count++;
+
+            // If we found more than one violation, it's not possible
+            if (count > 1) {
+                return false;
+            }
+
+            // Additional check: when we find a violation, we need to decide
+            // whether to remove the current element or the previous one
+            if (i >= 2 && array[i] < array[i - 2]) {
+                // If removing the previous element doesn't help, try removing current
+                if (i + 1 < array.length && array[i + 1] < array[i - 1]) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+// Test cases
+console.log(couldBeNonDecreasingArray([4, 2, 3])); // true (remove 4)
+console.log(couldBeNonDecreasingArray([4, 2, 1])); // false
+console.log(couldBeNonDecreasingArray([1, 2, 3])); // true
+console.log(couldBeNonDecreasingArray([1, 3, 2])); // true (remove 3)
+console.log(couldBeNonDecreasingArray([3, 4, 2, 3])); // false
