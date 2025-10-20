@@ -2058,3 +2058,9 @@ const guessTimesInTable = (n, x) => {
 //DAILY CODING PROBLEM (EASY)
 /* Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
 For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17. */
+
+//DAILY CODING PROBLEM (MEDIUM)
+/* Given an array of integers, write a function to determine whether the array could become non-decreasing by modifying at most 1 element.
+For example, given the array [10, 5, 7], you should return true, since we can modify the 10 into a 1 to make the array non-decreasing.
+Given the array [10, 5, 1], you should return false, since we can't modify any one element to get a non-decreasing array. */
+/*El truco sería hacer un contador y con un bucle for comprobar cuántas veces el numero que se está viendo es menor que el siguiente. Si el resultado final de count es menor que 1 significa que cambiando ese número sería posible hacer lo que dice el enunciado y retornaría true. Sino sería false*/
