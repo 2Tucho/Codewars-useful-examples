@@ -2058,6 +2058,37 @@ const guessTimesInTable = (n, x) => {
 //DAILY CODING PROBLEM (EASY)
 /* Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
 For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17. */
+const sumOfNumbersEqualsK = (numbers, k) => {
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = i; j < numbers.length; j++) {
+            if (numbers[i] + numbers[j] === k) {
+                return true
+            }
+        }
+    }
+    return false
+}
+function sumOfNumbersEqualsK(arr, k) {
+    const seen = {}; // Object to store numbers we've encountered
+    
+    for (const num of arr) {
+        const needed = k - num; // Calculate what number we need to reach k
+        
+        // If we've already seen the needed number, we found a pair!
+        if (seen[needed]) {
+            return true;
+        }
+        
+        // Mark current number as seen
+        seen[num] = true;
+    }
+    
+    return false; // No pair found
+}
+
+// Test cases (same as before)
+console.log(sumOfNumbersEqualsK([10, 15, 3, 7], 17)); // true
+console.log(sumOfNumbersEqualsK([10, 15, 3, 7], 20)); // false
 
 //DAILY CODING PROBLEM (MEDIUM)
 /* Given an array of integers, write a function to determine whether the array could become non-decreasing by modifying at most 1 element.
