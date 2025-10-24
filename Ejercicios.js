@@ -2123,8 +2123,39 @@ const couldBeNonDecreasingArray = array => {
 }
 
 // Test cases
-console.log(couldBeNonDecreasingArray([4, 2, 3])); // true (remove 4)
+console.log(couldBeNonDecreasingArray([4, 2, 3])); // true (remove 4)º
 console.log(couldBeNonDecreasingArray([4, 2, 1])); // false
 console.log(couldBeNonDecreasingArray([1, 2, 3])); // true
 console.log(couldBeNonDecreasingArray([1, 3, 2])); // true (remove 3)
 console.log(couldBeNonDecreasingArray([3, 4, 2, 3])); // false
+
+//DAILY CODING PROBLEM (HARD)
+/* Given a list of integers, write a function that returns the largest sum of non-adjacent numbers. Numbers can be 0 or negative.
+For example, [2, 4, 6, 2, 5] should return 13, since we pick 2, 6, and 5. [5, 1, 1, 5] should return 10, since we pick 5 and 5. */
+function maxNonAdjacentSum(arr) {
+    if (arr.length === 0) return 0;
+    if (arr.length === 1) return Math.max(0, arr[0]);
+    
+    let include = Math.max(0, arr[0]); // Max sum including first element
+    let exclude = 0;                   // Max sum excluding first element
+    
+    for (let i = 1; i < arr.length; i++) {
+        // Current max excluding current element
+        const newExclude = Math.max(include, exclude);
+        
+        // Current max including current element
+        // We can only include current element if we excluded the previous one
+        include = exclude + Math.max(0, arr[i]);
+        
+        // Update exclude for next iteration
+        exclude = newExclude;
+    }
+    
+    return Math.max(include, exclude);
+}
+
+// Test cases
+console.log(maxNonAdjacentSum([2, 4, 6, 2, 5])); // 13 (2 + 6 + 5)
+console.log(maxNonAdjacentSum([5, 1, 1, 5]));    // 10 (5 + 5)
+console.log(maxNonAdjacentSum([3, 2, 7, 10]));   // 13 (3 + 10)
+console.log(maxNonAdjacentSum([-1, -2, -3]));    // 0 (pick nothing)
