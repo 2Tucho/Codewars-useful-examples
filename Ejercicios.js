@@ -2123,7 +2123,7 @@ const couldBeNonDecreasingArray = array => {
 }
 
 // Test cases
-console.log(couldBeNonDecreasingArray([4, 2, 3])); // true (remove 4)
+console.log(couldBeNonDecreasingArray([4, 2, 3])); // true (remove 4)º
 console.log(couldBeNonDecreasingArray([4, 2, 1])); // false
 console.log(couldBeNonDecreasingArray([1, 2, 3])); // true
 console.log(couldBeNonDecreasingArray([1, 3, 2])); // true (remove 3)
