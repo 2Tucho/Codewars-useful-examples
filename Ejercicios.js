@@ -2159,3 +2159,17 @@ console.log(maxNonAdjacentSum([2, 4, 6, 2, 5])); // 13 (2 + 6 + 5)
 console.log(maxNonAdjacentSum([5, 1, 1, 5]));    // 10 (5 + 5)
 console.log(maxNonAdjacentSum([3, 2, 7, 10]));   // 13 (3 + 10)
 console.log(maxNonAdjacentSum([-1, -2, -3]));    // 0 (pick nothing)
+
+//DAILY CODING PROBLEM (EASY)
+/* Given a positive integer N, find the smallest number of steps it will take to reach 1.
+There are two kinds of permitted steps:
+You may decrement N to N - 1.
+If a * b = N, you may decrement N to the larger of a and b.
+For example, given 100, you can reach 1 in five steps with the following route: 100 -> 10 -> 9 -> 3 -> 2 -> 1. */
+
+//DAILY CODING PROBLEM (EASY)
+/* Given a sorted list of integers, square the elements and give the output in sorted order.
+For example, given [-9, -2, 0, 2, 3], return [0, 4, 4, 9, 81]. */
+const squareAndSortArrayElements = array => {
+    return array.map(elem => elem * elem).sort((a, b) => a - b)
+}
