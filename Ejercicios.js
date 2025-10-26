@@ -2170,3 +2170,6 @@ For example, given 100, you can reach 1 in five steps with the following route: 
 //DAILY CODING PROBLEM (EASY)
 /* Given a sorted list of integers, square the elements and give the output in sorted order.
 For example, given [-9, -2, 0, 2, 3], return [0, 4, 4, 9, 81]. */
+const squareAndSortArrayElements = array => {
+    return array.map(elem => elem * elem).sort((a, b) => a - b)
+}
